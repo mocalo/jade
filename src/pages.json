@@ -1,0 +1,348 @@
+{
+	// 组件自动引入规则
+	"easycom": {
+		// 是否开启自动扫描
+		"autoscan": true,
+		// 以正则方式自定义组件匹配规则
+		"custom": {
+			// uni-ui 规则如下配置
+			"^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue",
+			// 以 Xtx 开头的组件，在 components 文件夹中查找引入（需要重启服务器）
+			"^Xtx(.*)": "@/components/Xtx$1.vue"
+		}
+	},
+	"pages": [
+		//pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "white",
+				"navigationBarTitleText": "首页"
+			}
+		},
+    {
+    	"path": "pages/sale/sale",
+    	"style": {
+    		"navigationStyle": "custom",
+    		"navigationBarTextStyle": "white",
+    		"navigationBarTitleText": "抢购"
+    	}
+    },
+		{
+			"path": "pages/category/category",
+			"style": {
+				"navigationBarTitleText": "商品分类"
+			}
+		},
+		{
+			"path": "pages/cart/cart",
+			"style": {
+				"navigationBarTitleText": "购物车"
+			}
+		},
+		{
+			"path": "pages/cart/cart2",
+			"style": {
+				"navigationBarTitleText": "购物车"
+			}
+		},
+		{
+			"path": "pages/my/my",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "white",
+				"navigationBarTitleText": "我的"
+			}
+		},
+
+		{
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "登录"
+			}
+		},
+    {
+			"path": "pages/change/change",
+			"style": {
+				"navigationBarTitleText": "交易管理"
+			}
+		},
+    {
+			"path": "pages/login/signin",
+			"style": {
+				"navigationBarTitleText": "注册"
+			}
+		},
+    {
+      "path": "pages/login/service",
+      "style": {
+        "navigationBarTitleText": "服务协议"
+      }
+    },
+		{
+			"path": "pages/hot/hot",
+			"style": {
+				"navigationBarTitleText": "热门推荐"
+			}
+		},
+		{
+			"path": "pages/goods/goods",
+			"style": {
+				"navigationBarTitleText": "商品详情"
+			}
+		},
+		{
+			"path": "pages/sale/saleGoods",
+			"style": {
+				"navigationBarTitleText": "抢购商品"
+			}
+		},
+		{
+			"path": "pages/coupon/coupon",
+			"style": {
+				"navigationBarTitleText": "抵扣券"
+			}
+		},
+    {
+			"path": "pages/coupon/couponbuy",
+			"style": {
+				"navigationBarTitleText": "购买抵扣券"
+			}
+		},
+		{
+			"path": "pages/inviteCode/inviteCode",
+			"style": {
+				"navigationBarTitleText": "邀请二维码"
+			}
+		},
+		{
+			"path": "pages/about/about",
+			"style": {
+				"navigationBarTitleText": "关于我们"
+			}
+		},
+    {
+			"path": "pages/myteam/myteam",
+			"style": {
+				"navigationBarTitleText": "我的团队"
+			}
+		},
+    {
+			"path": "pages/myteam/allteams",
+			"style": {
+				"navigationBarTitleText": "订单列表"
+			}
+		},
+    {
+			"path": "pages/setPwd/setPwd",
+			"style": {
+				"navigationBarTitleText": "二级密码"
+			}
+		},
+    {
+      "path": "pages/agency/agency",
+      "style": {
+        "navigationBarTitleText": "抢盲盒"
+      }
+    },
+    {
+      "path": "pages/invite/invite",
+      "style": {
+        "navigationBarTitleText": "玉珊阁"
+      }
+    },
+    {
+      "path": "pages/integral/integral",
+      "style": {
+        "navigationBarTitleText": "积分商城"
+      }
+    },
+    {
+      "path": "pages/box/box",
+      "style": {
+        "navigationBarTitleText": "我的盲盒"
+      }
+    },
+    {
+      "path": "pages/logistics/logistics",
+      "style": {
+        "navigationBarTitleText": "物流详情"
+      }
+    },
+    {
+      "path": "pages/commission/commission",
+      "style": {
+        "navigationBarTitleText": "我的佣金"
+      }
+    },
+    {
+      "path": "pages/commission/commissionList",
+      "style": {
+        "navigationBarTitleText": "我的佣金"
+      }
+    },
+    {
+      "path": "pages/commission/commissionLogList",
+      "style": {
+        "navigationBarTitleText": "佣金明细"
+      }
+    },
+    {
+      "path": "pages/commission/scoreLogList",
+      "style": {
+        "navigationBarTitleText": "积分明细"
+      }
+    },
+    {
+      "path": "pages/commission/content",
+      "style": {
+        "navigationBarTitleText": "分销说明"
+      }
+    },
+    {
+      "path": "pages/earnings/earnings",
+      "style": {
+        "navigationBarTitleText": "我的收益"
+      }
+    }
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	// 设置 TabBar
+	"tabBar": {
+		"color": "#333",
+		"selectedColor": "#799372",
+		"backgroundColor": "#fff",
+		"borderStyle": "white",
+		"list": [
+			{
+				"text": "首页",
+				"pagePath": "pages/index/index",
+				"iconPath": "static/tabs/home_default.png",
+				"selectedIconPath": "static/tabs/home_selected.png"
+			},
+			{
+				"text": "抢购",
+				"pagePath": "pages/sale/sale",
+				"iconPath": "static/tabs/category_default.png",
+				"selectedIconPath": "static/tabs/category_selected.png"
+			},
+			{
+				"text": "购物车",
+				"pagePath": "pages/cart/cart",
+				"iconPath": "static/tabs/cart_default.png",
+				"selectedIconPath": "static/tabs/cart_selected.png"
+			},
+			{
+				"text": "我的",
+				"pagePath": "pages/my/my",
+				"iconPath": "static/tabs/user_default.png",
+				"selectedIconPath": "static/tabs/user_selected.png"
+			}
+		]
+	},
+	// 分包加载规则
+	"subPackages": [
+		{
+			// 子包的根目录
+			"root": "pagesMember",
+			// 页面路径和窗口表现
+			"pages": [
+				{
+					"path": "settings/settings",
+					"style": {
+						"navigationBarTitleText": "设置"
+					}
+				},
+				{
+					"path": "profile/profile",
+					"style": {
+						"navigationStyle": "custom",
+						"navigationBarTextStyle": "white",
+						"navigationBarTitleText": "个人信息"
+					}
+				},
+				{
+					"path": "address/address",
+					"style": {
+						"navigationBarTitleText": "地址管理"
+					}
+				},
+				{
+					"path": "address-form/address-form",
+					"style": {
+						"navigationBarTitleText": ""
+					}
+				},
+				{
+					"path": "updatePwd/updatePwd",
+					"style": {
+						"navigationBarTitleText": "修改密码"
+					}
+				},
+				{
+					"path": "payAddress/payAddress",
+					"style": {
+						"navigationBarTitleText": "收款方式"
+					}
+				}
+			]
+		},
+		{
+			"root": "pagesOrder",
+			"pages": [
+				{
+					"path": "create/create",
+					"style": {
+						"navigationBarTitleText": "填写订单"
+					}
+				},
+				{
+					"path": "detail/detail",
+					"style": {
+						"navigationBarTitleText": "订单详情",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "payment/payment",
+					"style": {
+						"navigationBarTitleText": "支付订单"
+					}
+				},
+        {
+					"path": "payment/paymentSell",
+					"style": {
+						"navigationBarTitleText": "寄售支付"
+					}
+				},
+				{
+					"path": "list/list",
+					"style": {
+						"navigationBarTitleText": "订单列表"
+					}
+				},
+				{
+					"path": "list/sellerlist",
+					"style": {
+						"navigationBarTitleText": "订单列表"
+					}
+				}
+			]
+		}
+	],
+	// 分包预下载规则
+	"preloadRule": {
+		"pages/my/my": {
+			"network": "all",
+			"packages": [
+				"pagesMember"
+			]
+		}
+	}
+}
