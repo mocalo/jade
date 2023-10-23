@@ -19,13 +19,18 @@ const getPayAddress = async () => {
     payment_type = 'alipay'
   } else if (query.payFlag == 3) {
     payment_type = 'wechat'
-  }
+  }else if (query.payFlag == 4) {
+			payment_type = 'bnbusdt'
+		} else if (query.payFlag == 5) {
+			payment_type = 'trcusdt'
+		}
   var data = {
     payment_type: payment_type,
   }
   const res = await getPayAgencyAPI(data)
   payAddress.value = res.data
 }
+
 //复制
 const copyname = (name: string) => {
   uni.setClipboardData({
@@ -39,6 +44,7 @@ const copyname = (name: string) => {
     },
   })
 }
+
 // 点击图片时
 const onTapImage = (url: string) => {
   // 大图预览
@@ -64,25 +70,25 @@ onLoad(() => {
     <view class="login" v-if="query.payFlag == 1">
       <!-- 网页端表单登录 -->
       <view class="all">
-        <text class="all_text">姓名</text>
+        <text class="title">姓名：</text>
         <text class="input">{{ payAddress?.name }}</text>
         <view class="btn" @click="copyname(payAddress?.name)">复制</view>
       </view>
 
       <view class="all">
-        <text class="all_text">银行</text>
+        <text class="title">银行：</text>
         <text class="input">{{ payAddress?.bank_name }}</text>
         <view class="btn" @click="copyname(payAddress?.bank_name)">复制</view>
       </view>
 
       <view class="all">
-        <text class="all_text">卡号</text>
+        <text class="title">卡号：</text>
         <text class="input">{{ payAddress?.bank_no }}</text>
         <view class="btn" @click="copyname(payAddress?.bank_no)">复制</view>
       </view>
 
       <view class="all">
-        <text class="all_text">开户行</text>
+        <text class="title">开户行：</text>
         <text class="input">{{ payAddress?.bank_address }}</text>
         <view class="btn" @click="copyname(payAddress?.bank_address)">复制</view>
       </view>
@@ -106,7 +112,36 @@ onLoad(() => {
           @tap="onTapImage(payAddress?.qrcode_url)"
         />
       </view>
+      <!-- <view class="weixin" v-else">
+        <image src="payAddress?.qrcode_url" class="image" />
+      </view> -->
     </view>
+	
+			<view class="login" v-if="query.payFlag == 4">
+				<!-- 数字货币通道1 -->
+				<view class="weixin">
+					<image :src="payAddress?.qrcode_url" class="image" @tap="onTapImage(payAddress?.qrcode_url)" />
+				</view>
+				<view class="all">
+					<text class="title">地址：</text>
+					<text class="input">{{ payAddress?.address }}</text>
+					<view class="btn" @click="copyname(payAddress?.address)">复制</view>
+				</view>
+			</view>
+			<view class="login" v-if="query.payFlag == 5">
+				<!-- 数字货币通道2 -->
+				<view class="weixin">
+					<image :src="payAddress?.qrcode_url" class="image" @tap="onTapImage(payAddress?.qrcode_url)" />
+				</view>
+				<view class="all">
+					<text class="title">地址：</text>
+					<text class="input">{{ payAddress?.address }}</text>
+					<view class="btn" @click="copyname(payAddress?.address)">复制</view>
+				</view>
+				<!-- <view class="weixin" v-else">
+	  <image src="payAddress?.qrcode_url" class="image" />
+	</view> -->
+			</view>
   </view>
 </template>
 
@@ -119,7 +154,8 @@ page {
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding: 20rpx 40rpx;
+  // padding: 20rpx 40rpx;
+	
 }
 
 .logo {
@@ -135,43 +171,44 @@ page {
 .login {
   display: flex;
   flex-direction: column;
-  height: 60vh;
-  padding: 40rpx 20rpx 20rpx;
-
+  height: 50vh;
+  padding: 40rpx 20rpx 0rpx;
+	background-color: #fff;
   .all {
-    width: 100%;
+    margin: 0rpx 35rpx;
     display: flex;
     justify-content: center;
   }
 
   .input {
-    width: 90%;
+    width: 100%;
     height: 40rpx;
     font-size: 28rpx;
-    border-radius: 72rpx;
-    padding: 20rpx 30rpx 0 0;
+    padding: 20rpx 30rpx 0rpx 0rpx;
     margin-bottom: 20rpx;
-    text-align: center;
+    text-align: left;
+	color: #333;
+    //border: 1px solid #799372;
   }
   .btn {
-    width: 40%;
+    width: 30%;
     height: 60rpx;
     font-size: 28rpx;
     border-radius: 72rpx;
     padding: 20rpx 0rpx 0rpx 0rpx;
     //实线框
-    border: 1px solid #799372;
     background-color: #fff;
     text-align: center;
+	color: #333;
   }
-  .all_text {
-    width: 30%;
+  .title {
+    width: 34%;
     font-size: 28rpx;
     border-radius: 72rpx;
-    padding: 20rpx 30rpx 0 0;
+    padding: 20rpx 30rpx 0rpx 0rpx;
     margin-bottom: 20rpx;
+	color: #333;	
   }
-
   .button {
     display: flex;
     align-items: center;
@@ -199,11 +236,11 @@ page {
     align-items: center;
   }
   .phone {
-    background-color: #799372;
+    background-color: #333;
   }
 
   .wechat {
-    background-color: #799372;
+    background-color: #333;
   }
   .image {
     width: 300rpx;

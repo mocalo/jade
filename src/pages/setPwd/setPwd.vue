@@ -215,11 +215,11 @@ page {
   }
 
   .phone {
-    background-color: #799372;
+  background-image: linear-gradient(to right, #575759, #212123);
   }
 
   .wechat {
-    background-color: #799372;
+  background-image: linear-gradient(to right, #575759, #212123);
   }
   .image {
     width: 500rpx;

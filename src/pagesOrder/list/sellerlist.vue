@@ -6,7 +6,6 @@ import OrderListSeller from './components/OrderListSeller.vue'
 const query = defineProps<{
   type: string
 }>()
-
 // tabs 数据
 const orderTabs = ref([
   { orderState: 0, title: '全部', isRender: false },
@@ -20,6 +19,7 @@ const orderTabs = ref([
 const activeIndex = ref(orderTabs.value.findIndex((v) => v.orderState === Number(query.type)))
 // 默认渲染容器
 orderTabs.value[activeIndex.value].isRender = true
+
 </script>
 
 <template>
@@ -27,7 +27,7 @@ orderTabs.value[activeIndex.value].isRender = true
     <!-- tabs -->
     <view class="tabs">
       <text
-        class="item"
+        :class="activeIndex == index?'active item':'item'"
         v-for="(item, index) in orderTabs"
         :key="item.title"
         @tap="
@@ -40,7 +40,7 @@ orderTabs.value[activeIndex.value].isRender = true
         {{ item.title }}
       </text>
       <!-- 游标 -->
-      <view class="cursor" :style="{ left: activeIndex * 25 + '%' }"></view>
+      <view class="cursor" :style="{ left: (activeIndex * 25)+10 + '%' }"></view>
     </view>
     <!-- 滑动容器 -->
     <swiper class="swiper" :current="activeIndex" @change="activeIndex = $event.detail.current">
@@ -81,17 +81,19 @@ page {
     flex: 1;
     text-align: center;
     padding: 20rpx;
-    font-size: 20rpx;
-    color: #262626;
+    font-size: 26rpx;
+    color: #777;
   }
-
+	.active {
+		font-weight: 700;
+    color: #262626!important;
+	}
   .cursor {
     position: absolute;
     left: 0;
-    bottom: 0;
-    width: 25%;
+    bottom: 10rpx;
+    width: 6%;
     height: 6rpx;
-    padding: 0 50rpx;
     background-color: #27ba9b;
     /* 过渡效果 */
     transition: all 0.4s;

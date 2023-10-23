@@ -11,6 +11,7 @@ import { useMemberStore } from '@/stores'
 import type { CartItem } from '@/types/cart'
 import { onShow } from '@dcloudio/uni-app'
 import { computed, ref } from 'vue'
+import { phoneNumShow } from '@/utils/timechange'
 
 // 是否适配底部安全区域
 defineProps<{
@@ -140,12 +141,13 @@ const { guessRef, onScrolltolower } = useGuessList()
                 ></image>
                 <view class="meta">
                   <view class="name ellipsis">{{ item.goods.goods_name }}</view>
+                  <view class="name meta-text">商品归属者：{{ phoneNumShow(item.belongs.mobile) }}</view>
                   <view class="price">{{ item.goods.goods_price }}</view>
                 </view>
               </navigator>
               <!-- 商品数量 -->
               <view class="count">
-                {{ item.buy_num }}
+                仅 {{ item.buy_num }} 件 欲购从速
               </view>
             </view>
             <!-- 右侧删除按钮 -->
@@ -197,13 +199,14 @@ const { guessRef, onScrolltolower } = useGuessList()
 </template>
 
 <style lang="scss">
+	
 // 根元素
 :host {
   height: 100vh;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  background-color: #f7f7f8;
+  background-color: #f3f3f3;
 }
 
 // 滚动容器
@@ -238,7 +241,7 @@ const { guessRef, onScrolltolower } = useGuessList()
   .goods {
     display: flex;
     padding: 20rpx 20rpx 20rpx 80rpx;
-    border-radius: 10rpx;
+    border-radius: 20rpx;
     background-color: #fff;
     position: relative;
 
@@ -273,20 +276,28 @@ const { guessRef, onScrolltolower } = useGuessList()
     .picture {
       width: 170rpx;
       height: 170rpx;
+	  border-radius: 10rpx;
     }
 
     .meta {
       flex: 1;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: space-around;
       margin-left: 20rpx;
+	  .meta-text {
+		  font-size: 24rpx;
+		  color:#999;
+		  position: relative;
+		  top: -10rpx;
+		  font-weight: 500;
+	  }
     }
 
     .name {
-      height: 72rpx;
-      font-size: 26rpx;
-      color: #444;
+      font-size: 28rpx;
+	  font-weight: 700;
+      color: #333;
     }
 
     .attrsText {
@@ -323,7 +334,9 @@ const { guessRef, onScrolltolower } = useGuessList()
       align-items: center;
       width: 220rpx;
       height: 48rpx;
-
+	font-size: 22rpx;
+	color: #999;
+	text-align: right;
       .text {
         height: 100%;
         padding: 0 20rpx;

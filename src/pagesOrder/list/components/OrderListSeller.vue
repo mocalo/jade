@@ -10,6 +10,7 @@ import type { OrderItem } from '@/types/order'
 import type { OrderListParams } from '@/types/order'
 import { onShow } from '@dcloudio/uni-app'
 import { onMounted, ref } from 'vue'
+import { timechange } from '@/utils/timechange'
 
 // 获取屏幕边界到安全区域距离
 const { safeAreaInsets } = uni.getSystemInfoSync()
@@ -186,7 +187,7 @@ const onRefresherrefresh = async () => {
     <view class="card" v-for="order in orderList" :key="order.id">
       <!-- 订单信息 -->
       <view class="status">
-        <text class="date">{{ order.create_time }}</text>
+        <text class="date">{{ timechange(order.create_time) }}</text>
         <!-- 订单状态文字 -->
         <text class="red_date" v-if="order.order_status != OrderState.ZhiFuChengGong">{{
           orderStateList[order.order_status].text

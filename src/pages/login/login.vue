@@ -49,9 +49,21 @@ const changeService = () => {
 
 <template>
   <view class="viewport">
-    <view class="logo">
+  <!--  <view class="logo">
       <image src="@/static/images/logo.png"></image>
-    </view>
+    </view> -->
+		<view class="main">
+			<view class="title">
+				<view>您好，</view>
+				<view>欢迎来到玉珊阁</view>
+			</view>
+			<view class="login-text">
+				<view class="login-title">
+					登录
+				</view>
+				<view class="text-border"></view>
+			</view>
+		</view>
     <view class="login">
       <!-- 网页端表单登录 -->
       <input
@@ -67,7 +79,7 @@ const changeService = () => {
         placeholder="请输入密码"
         v-model="profile_login.password"
       />
-      <button class="button phone" @tap="phonelogin">登录</button>
+      <button :class="(profile_login.mobile && profile_login.password)?'button phone':'button wechat'" @tap="phonelogin">登录</button>
       <view class="all">
         <!--忘记密码-->
         <!-- <view class="extra" @tap="changePwd">
@@ -101,7 +113,31 @@ page {
   height: 100%;
   padding: 20rpx 40rpx;
 }
-
+.main {
+	margin: 150rpx 30rpx 40rpx;
+	font-size: 36rpx;
+	font-weight: 700;
+	color: #555;
+	line-height: 60rpx;
+	.login-text {
+		margin-top: 60rpx;
+		padding-left: 10rpx;
+		position: relative;
+		.login-title {
+			position: relative;
+			z-index: 9;
+		}
+		.text-border {
+			width: 100rpx;
+			height: 15rpx;
+			background-color: #11e0b6;
+			position: absolute;
+			bottom: 5rpx;
+			left: 0rpx;
+			z-index: 3;
+		}
+	}
+}
 .logo {
   flex: 1;
   text-align: center;
@@ -116,15 +152,13 @@ page {
   display: flex;
   flex-direction: column;
   height: 60vh;
-  padding: 40rpx 20rpx 20rpx;
+  padding: 0rpx 20rpx 20rpx;
 
   .input {
     width: 100%;
     height: 80rpx;
     font-size: 28rpx;
-    border-radius: 72rpx;
-    border: 1px solid #ddd;
-    padding-left: 30rpx;
+    border-bottom: 1px solid #eeee;
     margin-bottom: 20rpx;
   }
 
@@ -137,6 +171,8 @@ page {
     font-size: 28rpx;
     border-radius: 72rpx;
     color: #fff;
+	margin-top: 100rpx;
+	transition: all ease 0.5s;
     .icon {
       font-size: 40rpx;
       margin-right: 6rpx;
@@ -144,11 +180,11 @@ page {
   }
 
   .phone {
-    background-color: #799372;
+    background-color: #11e0b6;
   }
 
   .wechat {
-    background-color: #799372;
+    background-color: #ccc;
   }
 
   .all {
@@ -226,7 +262,7 @@ page {
   color: #999;
   text-align: center;
   .tips_text {
-    color: #799372;
+    color: #11e0b6;
   }
 }
 </style>

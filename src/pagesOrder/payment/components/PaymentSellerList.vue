@@ -30,7 +30,11 @@ const getPayAddress = async () => {
     payment_type = 'alipay'
   } else if (query.payFlag == 3) {
     payment_type = 'wechat'
-  }
+  }else if (query.payFlag == 4) {
+			payment_type = 'bnbusdt'
+		} else if (query.payFlag == 5) {
+			payment_type = 'trcusdt'
+		}
   console.log(query.orderId)
   console.log(order.value)
   var data = {
@@ -121,174 +125,226 @@ onLoad(async () => {
         />
       </view>
     </view>
+	
+			<view class="login" v-if="query.payFlag == 4">
+				<!-- 数字货币通道1 -->
+				<view class="weixin">
+					<image :src="payAddress?.qrcode_url" class="image" @tap="onTapImage(payAddress?.qrcode_url)" />
+				</view>
+				<view class="all">
+					<text class="title">地址：</text>
+					<text class="input">{{ payAddress?.address }}</text>
+					<view class="btn" @click="copyname(payAddress?.address)">复制</view>
+				</view>
+			</view>
+			<view class="login" v-if="query.payFlag == 5">
+				<!-- 数字货币通道2 -->
+				<view class="weixin">
+					<image :src="payAddress?.qrcode_url" class="image" @tap="onTapImage(payAddress?.qrcode_url)" />
+				</view>
+				<view class="all">
+					<text class="title">地址：</text>
+					<text class="input">{{ payAddress?.address }}</text>
+					<view class="btn" @click="copyname(payAddress?.address)">复制</view>
+				</view>
+				<!-- <view class="weixin" v-else">
+	  <image src="payAddress?.qrcode_url" class="image" />
+	</view> -->
+			</view>	
   </view>
 </template>
 <style lang="scss">
 page {
-  height: 100%;
-}
+		height: 100%;
+	}
 
-.viewport {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  padding: 20rpx 40rpx;
-}
+	.viewport {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		// padding: 20rpx 40rpx;
 
-.logo {
-  flex: 1;
-  text-align: center;
-  image {
-    width: 520rpx;
-    height: 220rpx;
-    margin-top: 15vh;
-  }
-}
+	}
 
-.login {
-  display: flex;
-  flex-direction: column;
-  height: 60vh;
-  padding: 40rpx 60rpx 20rpx;
+	.logo {
+		flex: 1;
+		text-align: center;
 
-  .all {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
+		image {
+			width: 520rpx;
+			height: 220rpx;
+			margin-top: 15vh;
+		}
+	}
 
-  .input {
-    width: 90%;
-    height: 40rpx;
-    font-size: 28rpx;
-    border-radius: 72rpx;
-    padding: 20rpx 30rpx 0rpx 0rpx;
-    margin-bottom: 20rpx;
-    text-align: center;
-  }
-  .btn {
-    width: 40%;
-    height: 60rpx;
-    font-size: 28rpx;
-    border-radius: 72rpx;
-    padding: 20rpx 0rpx 0rpx 0rpx;
-    //实线框
-    border: 1px solid #799372;
-    background-color: #fff;
-    text-align: center;
-  }
-  .all_text {
-    width: 30%;
-    font-size: 28rpx;
-    border-radius: 72rpx;
-    padding: 20rpx 30rpx 0rpx 0rpx;
-    margin-bottom: 20rpx;
-  }
+	.login {
+		display: flex;
+		flex-direction: column;
+		height: 50vh;
+		padding: 40rpx 20rpx 0rpx;
+		background-color: #fff;
 
-  .button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 80rpx;
-    font-size: 28rpx;
-    border-radius: 72rpx;
-    color: #fff;
-    .icon {
-      font-size: 40rpx;
-      margin-right: 6rpx;
-    }
-  }
+		.all {
+			margin: 0rpx 35rpx;
+			display: flex;
+			justify-content: center;
+			.all_text {
+				width: 160rpx;
+				font-size: 28rpx;
+			height: 40rpx;
+			line-height: 40rpx;
+			position: relative;
+			top: 12rpx;
+			}
+		}
 
-  .phone {
-    background-color: #799372;
-  }
+		.input {
+			width: 100%;
+			overflow: hidden;
+			height: 40rpx;
+			font-size: 28rpx;
+			padding: 20rpx 30rpx 0rpx 0rpx;
+			margin-bottom: 20rpx;
+			text-align: left;
+			color: #333;
+			//border: 1px solid #799372;
+		}
 
-  .wechat {
-    background-color: #799372;
-  }
-  .alipay {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .weixin {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .image {
-    width: 300rpx;
-    height: 300rpx;
-  }
-  .extra {
-    flex: 1;
-    padding: 70rpx 70rpx 0;
-    .caption {
-      width: 440rpx;
-      line-height: 1;
-      border-top: 1rpx solid #ddd;
-      font-size: 26rpx;
-      color: #999;
-      position: relative;
-      text {
-        transform: translate(-40%);
-        background-color: #fff;
-        position: absolute;
-        top: -12rpx;
-        left: 50%;
-      }
-    }
+		.btn {
+			width: 30%;
+			height: 60rpx;
+			font-size: 28rpx;
+			border-radius: 72rpx;
+			padding: 20rpx 0rpx 0rpx 0rpx;
+			//实线框
+			background-color: #fff;
+			text-align: center;
+			color: #333;
+		}
 
-    .options {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-top: 70rpx;
-      button {
-        padding: 0;
-        background-color: transparent;
-        &::after {
-          border: none;
-        }
-      }
-    }
+		.title {
+			width: 34%;
+			font-size: 28rpx;
+			border-radius: 72rpx;
+			padding: 20rpx 30rpx 0rpx 0rpx;
+			margin-bottom: 20rpx;
+			color: #333;
+		}
 
-    .icon {
-      font-size: 24rpx;
-      color: #444;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+		.button {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 100%;
+			height: 80rpx;
+			font-size: 28rpx;
+			border-radius: 72rpx;
+			color: #fff;
 
-      &::before {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 80rpx;
-        height: 80rpx;
-        margin-bottom: 6rpx;
-        font-size: 40rpx;
-        border: 1rpx solid #444;
-        border-radius: 50%;
-      }
-    }
-    .icon-weixin::before {
-      border-color: #06c05f;
-      color: #06c05f;
-    }
-  }
-}
+			.icon {
+				font-size: 40rpx;
+				margin-right: 6rpx;
+			}
+		}
 
-.tips {
-  position: absolute;
-  bottom: 80rpx;
-  left: 20rpx;
-  right: 20rpx;
-  font-size: 22rpx;
-  color: #999;
-  text-align: center;
-}
+		.alipay {
+			width: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.weixin {
+			width: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.phone {
+			background-color: #333;
+		}
+
+		.wechat {
+			background-color: #333;
+		}
+
+		.image {
+			width: 300rpx;
+			height: 300rpx;
+		}
+
+		.extra {
+			flex: 1;
+			padding: 70rpx 70rpx 0;
+
+			.caption {
+				width: 440rpx;
+				line-height: 1;
+				border-top: 1rpx solid #ddd;
+				font-size: 26rpx;
+				color: #999;
+				position: relative;
+
+				text {
+					transform: translate(-40%);
+					background-color: #fff;
+					position: absolute;
+					top: -12rpx;
+					left: 50%;
+				}
+			}
+
+			.options {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				margin-top: 70rpx;
+
+				button {
+					padding: 0;
+					background-color: transparent;
+
+					&::after {
+						border: none;
+					}
+				}
+			}
+
+			.icon {
+				font-size: 24rpx;
+				color: #444;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+
+				&::before {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					width: 80rpx;
+					height: 80rpx;
+					margin-bottom: 6rpx;
+					font-size: 40rpx;
+					border: 1rpx solid #444;
+					border-radius: 50%;
+				}
+			}
+
+			.icon-weixin::before {
+				border-color: #06c05f;
+				color: #06c05f;
+			}
+		}
+	}
+
+	.tips {
+		position: absolute;
+		bottom: 80rpx;
+		left: 20rpx;
+		right: 20rpx;
+		font-size: 22rpx;
+		color: #999;
+		text-align: center;
+	}
 </style>

@@ -38,11 +38,13 @@ defineProps<{
 <style lang="scss">
 /* 轮播图 */
 .carousel {
-  height: 380rpx;
+  margin: 0 35rpx;
+  height: 320rpx;
+  border-radius: 20rpx;
   position: relative;
   overflow: hidden;
   transform: translateY(0);
-  background-color: #efefef;
+  // background-color: #efefef;
   .indicator {
     position: absolute;
     left: 0;

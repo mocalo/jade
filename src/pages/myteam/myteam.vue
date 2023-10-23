@@ -2,7 +2,7 @@
 import { getAchievementAll, queryMyReferrer, queryMyTeam } from '@/services/myteam'
 import type { PageParams } from '@/types/global'
 import { ref } from 'vue'
-import { phoneNumShow } from '@/utils/timechange'
+import { phoneNumShow,timechange } from '@/utils/timechange'
 import { onLoad } from '@dcloudio/uni-app'
 // 请求参数
 const queryParams: Required<PageParams> = {
@@ -76,9 +76,10 @@ defineExpose({
       <view class="text">团队有效人数</view>
     </view>
   </view>
-  <view class="fenge">
-    <view class="text">会员列表</view>
-  </view>
+		<view class="tips">
+			<text>用户昵称</text>
+			<text>电话</text>
+		</view>
   <!-- 猜你喜欢 -->
   <view class="guess">
     <navigator
@@ -96,20 +97,31 @@ defineExpose({
           <view class="text2"> {{ item.nickname }} </view>
         </view>
         <view class="image2">
-          <view class="text3"> {{ phoneNumShow(item.mobile) }}</view>
+          <view class="text2"> {{ phoneNumShow(item.mobile) }}</view>
         </view>
       </view>
     </navigator>
   </view>
+  
   <view class="loading-text">
     {{ finish ? '没有更多数据~' : '正在加载...' }}
   </view>
 </template>
 
 <style lang="scss">
+	page {
+		background-color: #f3f3f3;
+	}
 :host {
   display: block;
 }
+.tips {
+		font-size: 24rpx;
+		color: #777;
+		display: flex;
+		margin: 30rpx 70rpx 20rpx;
+		justify-content: space-between;
+	}
 /* 分类标题 */
 .caption {
   display: flex;
@@ -117,8 +129,10 @@ defineExpose({
   line-height: 1;
   padding: 36rpx 0 40rpx;
   font-size: 32rpx;
-  background-image: url(@/static/images/earnings.png);
-  background-size: cover;
+  background-color: #fff;
+  margin: 30rpx;
+		box-shadow: 0rpx 10rpx 35rpx 10rpx #e6e6e6;
+		border-radius: 20rpx;
   .caption_item {
     width: 50%;
     display: flex;
@@ -127,12 +141,12 @@ defineExpose({
     align-items: center;
     .text {
       font-size: 20rpx;
-      color: #799372;
+      color: #999;
       padding: 20rpx 0 0;
     }
     .text1 {
-      font-size: 32rpx;
-      color: #799372;
+						font-size: 60rpx;
+						color: #555;
     }
   }
 }
@@ -149,51 +163,60 @@ defineExpose({
   }
 }
 /* 猜你喜欢 */
+
 .guess {
-  //display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  padding: 0 20rpx;
-  .guess-item {
-    width: 100%;
-    padding: 5rpx 0rpx 5rpx;
-    border-radius: 10rpx;
-    overflow: hidden;
-    background-color: #fff;
-  }
-  .image {
-    width: 750rpx;
-    height: 80rpx;
-    padding: 20rpx 0rpx 0rpx 0;
-    background-color: #f3f3f3;
-    //background-image: url(@/static/images/Earnings.png);
-    background-size: cover;
-    display: flex;
-    align-items: center;
-    //justify-content: center;
-    .image2 {
-      width: 100%;
-      height: 100%;
-      .text3 {
-        width: 100%;
-        text-align: center;
-        font-size: 20rpx;
-        color: #799372;
-        padding-right: 50rpx;
-      }
-    }
-    .image1 {
-      width: 100%;
-      height: 100%;
-      .text2 {
-        width: 100%;
-        text-align: center;
-        font-size: 20rpx;
-        color: #799372;
-      }
-    }
-  }
-}
+		//display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		padding: 0 20rpx;
+		margin: 0 30rpx;
+		background-color: #fff;
+
+		box-shadow: 0rpx 10rpx 35rpx 10rpx #e6e6e6;
+		border-radius: 20rpx;
+		.guess-item {
+			width: 100%;
+			padding: 5rpx 0rpx 5rpx;
+			border-radius: 10rpx;
+			overflow: hidden;
+			border-bottom: 1px solid #ddd;
+		}
+
+		.image {
+			//background-image: url(@/static/images/commission.png);
+			background-size: cover;
+			display: flex;
+			justify-content: space-between;
+			padding: 20rpx;
+
+			.image2 {
+					font-size: 28rpx;
+			}
+			.image1 {
+				width: 100%;
+				height: 100%;
+
+				.text1 {
+					width: 100%;
+					text-align: left;
+					font-size: 28rpx;
+					color: #333;
+					margin-bottom: 20rpx;
+					position: relative;
+					left: -10rpx;
+				}
+
+				.text2 {
+					width: 100%;
+					text-align: left;
+					font-size: 28rpx;
+					color: #333;
+					display: flex;
+					justify-content: space-between;
+				}
+			}
+		}
+	}
 // 加载提示文字
 .loading-text {
   text-align: center;

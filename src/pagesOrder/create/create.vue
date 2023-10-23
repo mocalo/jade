@@ -122,7 +122,7 @@ const onOrderSubmit = async () => {
       <view class="address"> 请选择收货地址 </view>
       <text class="icon icon-right"></text>
     </navigator>
-
+		
     <!--抵扣券-->
     <view v-if="query.qiang_type == 1">
       <navigator
@@ -139,16 +139,27 @@ const onOrderSubmit = async () => {
         <text class="icon icon-right"></text>
       </navigator>
     </view>
-
+		<view class="main">
+			<navigator class="guess-item" :url="`/pages/goods/goods?id=${query.goods_id}&cart_type=0`">
+			<view class="shop main-list">
+				<view class="shop-left">
+					<image class="shop-image" :src="orderPre?.goods_master_image" mode="scaleToFill"></image>
+				</view>
+		
+				<view class="shop-right">
+					<view class="title">{{ orderPre?.goods_name }} </view>
+					<view class="shop-seller"  v-if="orderPre">
+						商品归属人:{{ phoneNumShow(orderPre.belongs.mobile) }}</view>
+					<view class="shop-price">￥ <text>{{ orderPre?.goods_price }}</text> </view>
+				</view>
+			</view>
+      </navigator>
+		</view>
     <!-- 商品信息 -->
-    <view class="guess">
+    <!-- <view class="guess">
       <navigator class="guess-item" :url="`/pages/goods/goods?id=${query.goods_id}&cart_type=0`">
         <image class="image" mode="aspectFill" :src="orderPre?.goods_master_image"></image>
-        <!-- <swiper @change="onChange" circular>
-         <swiper-item v-for="item in goods?.mainPictures" :key="item">
-           <image class="image" @tap="onTapImage(item)" mode="aspectFill" :src="item" />
-         </swiper-item>
-       </swiper> -->
+        
         <view class="name"> {{ orderPre?.goods_name }} </view>
         <view class="name" v-if="orderPre">
           商品归属人:{{ phoneNumShow(orderPre.belongs.mobile) }}
@@ -158,7 +169,7 @@ const onOrderSubmit = async () => {
           <text>{{ orderPre?.goods_price }}</text>
         </view>
       </navigator>
-    </view>
+    </view> -->
   </scroll-view>
 
   <!-- 吸底工具栏 -->
@@ -188,14 +199,15 @@ page {
 }
 
 .shipment {
-  margin: 20rpx;
+  margin: 30rpx;
   padding: 30rpx 30rpx 30rpx 84rpx;
   font-size: 26rpx;
-  border-radius: 10rpx;
+  border-radius: 20rpx;
   background: url(https://pcapi-xiaotuxian-front-devtest.itheima.net/miniapp/images/locate.png)
     20rpx center / 50rpx no-repeat #fff;
   position: relative;
 
+			box-shadow: 0rpx 10rpx 35rpx 10rpx #f3f3f3;
   .icon {
     font-size: 36rpx;
     color: #333;
@@ -212,17 +224,19 @@ page {
 
   .address {
     color: #666;
+	padding-right: 30rpx;
   }
 }
 
 .shipment1 {
-  margin: 20rpx;
+  margin: 30rpx;
   padding: 30rpx 30rpx 30rpx 84rpx;
   font-size: 26rpx;
-  border-radius: 10rpx;
+  border-radius: 20rpx;
   background: url(@/static/images/quan_my.png) 20rpx center / 50rpx no-repeat #fff;
   position: relative;
 
+			box-shadow: 0rpx 10rpx 15rpx 10rpx #f3f3f3;
   .icon {
     font-size: 36rpx;
     color: #333;
@@ -339,5 +353,84 @@ page {
   .disabled {
     opacity: 0.6;
   }
+}
+.main {
+		margin: 30rpx;
+		.main-list {
+			border-radius: 20rpx;
+
+			box-shadow: 0rpx 10rpx 35rpx 10rpx #e6e6e6;
+			margin-bottom: 30rpx;
+		}
+
+		.title {
+			padding: 20rpx;
+		}
+		.order {
+			min-height: 60rpx;
+			background-color: #fff;
+			padding: 30rpx;
+			font-size: 28rpx;
+			.list {
+				display: flex;
+				justify-content: space-between;
+				padding: 10rpx 0rpx;
+			}
+		}
+		.shop {
+			width: 100%;
+			min-height: 60rpx;
+			background-color: #fff;
+			padding: 20rpx;
+			display: flex;
+
+			.shop-left {
+				margin-right: 20rpx;
+
+				.shop-image {
+					width: 180rpx;
+					height: 180rpx;
+					border-radius: 20rpx;
+				}
+			}
+
+			.shop-right {
+				display: flex;
+				flex-direction: column;
+				justify-content: space-around;
+
+				.title {
+					font-size: 32rpx;
+					color: #333333;
+				}
+
+				.shop-seller {
+					font-size: 22rpx;
+					color: #777;
+					margin-bottom: 10rpx;
+				}
+
+				.shop-price {
+					color: #ff552c;
+					font-size: 22rpx;
+
+					text {
+						font-size: 32rpx;
+					}
+				}
+			}
+		}
+
+		.agent {
+			width: 100%;
+			min-height: 80rpx;
+			background-color: #fff;
+			padding: 20rpx;
+			display: flex;
+			justify-content: space-between;
+			color: #777;
+			font-size: 28rpx;
+
+		}
 }
 </style>

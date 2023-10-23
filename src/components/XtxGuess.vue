@@ -59,7 +59,7 @@ defineExpose({
 <template>
   <!-- 猜你喜欢 -->
   <view class="caption">
-    <text class="text">艺术概述</text>
+    <text class="text">艺术展览</text>
   </view>
   <view class="guess">
     <navigator
@@ -75,7 +75,7 @@ defineExpose({
        </swiper-item>
      </swiper> -->
       <view class="name"> {{ item.goods_name }} </view>
-      <view class="name"> 商品归属人:{{ phoneNumShow(item.belongs.mobile) }} </view>
+      <view class="name-tips"> 商品归属人:{{ phoneNumShow(item.belongs.mobile) }} </view>
       <view class="price">
         <text class="small">¥</text>
         <text>{{ item.goods_price }}</text>
@@ -120,26 +120,27 @@ defineExpose({
 
 /* 猜你喜欢 */
 .guess {
-  //display: flex;
+  display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding: 0 20rpx;
+  padding: 0 35rpx;
   .guess-item {
-    width: 100%;
-    padding: 24rpx 0rpx 20rpx;
+    width: 335rpx;
+    padding: 0rpx 0rpx 20rpx;
     margin-bottom: 20rpx;
     border-radius: 10rpx;
     overflow: hidden;
     background-color: #fff;
   }
   .image {
-    width: 750rpx;
-    height: 750rpx;
+    width: 335rpx;
+    height: 335rpx;
   }
   .name {
-    height: 75rpx;
+    height: 35rpx;
     margin: 10rpx 0;
     font-size: 26rpx;
+	padding-left: 20rpx;
     color: #262626;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -147,20 +148,28 @@ defineExpose({
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
   }
+  .name-tips {
+	  font-size: 18rpx;
+	  height: 45rpx;
+	  color: #999;
+	padding-left: 20rpx;
+  }
   .price {
     line-height: 1;
     padding-top: 4rpx;
     color: #cf4444;
     font-size: 26rpx;
+	padding-left: 20rpx;
   }
   .small {
     font-size: 80%;
   }
   .small1 {
-    margin: 0 0 0 450rpx;
     font-size: 80%;
+    margin: 0 0 0 80rpx;
   }
 }
+
 // 加载提示文字
 .loading-text {
   text-align: center;
@@ -169,3 +178,4 @@ defineExpose({
   padding: 20rpx 0;
 }
 </style>
+

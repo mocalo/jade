@@ -53,20 +53,21 @@ defineExpose({
 <template>
   <!-- 猜你喜欢 -->
   <view class="guess">
-    <navigator class="guess-item" v-for="item in guessList" :key="item.id">
-      <view class="image">
-        <view class="image3">
-          <image class="image4" src="@/static/images/item.png" />
-        </view>
-        <view class="image1">
-          <view class="text1"> {{ item.score }} </view>
-          <view class="text2"> {{ item.memo }} </view>
-        </view>
-        <view class="image2">
-          <view class="text3"> {{ timechange(item.create_time) }} </view>
-        </view>
-      </view>
-    </navigator>
+    
+		<navigator class="guess-item" v-for="item in guessList" :key="item.id">
+			<view class="image">
+		
+				<view class="image1">
+					<view class="text1"> {{ item.memo }} </view>
+					<view class="text2">
+						<view class="text3">
+							{{ timechange(item.create_time) }}
+						</view>
+						<view class="text4"> <text class="price"></text>+{{ item.score }} </view>
+					</view>
+				</view>
+			</view>
+		</navigator>
   </view>
   <view class="loading-text">
     {{ finish ? '没有更多数据~' : '正在加载...' }}
@@ -105,76 +106,55 @@ defineExpose({
 
 /* 猜你喜欢 */
 .guess {
-  //display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  padding: 0 20rpx;
-  .guess-item {
-    width: 100%;
-    padding: 5rpx 0rpx 5rpx;
-    border-radius: 10rpx;
-    overflow: hidden;
-    background-color: #fff;
-  }
-  .image {
-    width: 750rpx;
-    height: 150rpx;
-    background-color: #f3f3f3;
-    //background-image: url(@/static/images/commission.png);
-    background-size: cover;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    .image3 {
-      width: 20%;
-      height: 100%;
-      //background-color: #262626;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      .image4 {
-        width: 100rpx;
-        height: 100rpx;
-      }
-    }
-    .image2 {
-      width: 40%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      .text3 {
-        width: 100%;
-        text-align: right;
-        font-size: 28rpx;
-        color: #799372;
-        padding-right: 50rpx;
-        .price {
-          text-align: right;
-          font-size: 20rpx;
-          color: #799372;
-        }
-      }
-    }
-    .image1 {
-      width: 40%;
-      height: 100%;
-      margin: 5% 0 0 0;
-      .text1 {
-        width: 100%;
-        text-align: left;
-        font-size: 36rpx;
-        color: #799372;
-      }
-      .text2 {
-        width: 100%;
-        text-align: left;
-        font-size: 16rpx;
-        color: #799372;
-      }
-    }
-  }
-}
+		//display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		padding: 0 20rpx;
+		margin: 0 30rpx;
+		background-color: #fff;
+
+		border-radius: 20rpx;
+		.guess-item {
+			width: 100%;
+			padding: 5rpx 0rpx 5rpx;
+			border-radius: 10rpx;
+			overflow: hidden;
+			border-bottom: 1px solid #ddd;
+		}
+
+		.image {
+			//background-image: url(@/static/images/commission.png);
+			background-size: cover;
+			display: flex;
+			justify-content: space-between;
+			padding: 20rpx;
+
+
+			.image1 {
+				width: 100%;
+				height: 100%;
+
+				.text1 {
+					width: 100%;
+					text-align: left;
+					font-size: 28rpx;
+					color: #333;
+					margin-bottom: 20rpx;
+					position: relative;
+					left: -10rpx;
+				}
+
+				.text2 {
+					width: 100%;
+					text-align: left;
+					font-size: 20rpx;
+					color: #777;
+					display: flex;
+					justify-content: space-between;
+				}
+			}
+		}
+	}
 // 加载提示文字
 .loading-text {
   text-align: center;

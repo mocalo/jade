@@ -3,9 +3,10 @@ import { getHomeBannerAPI } from '@/services/home'
 import type { BannerItem } from '@/types/home'
 import { onLoad } from '@dcloudio/uni-app'
 import { ref } from 'vue'
-import CustomNavbar from './components/CustomNavbar.vue'
+import CustomNavbar from './components/CustomNavbarNew.vue'
 import Gongju from './components/Gongju.vue'
-import Integral from './components/Integral.vue'
+// import Integral from './components/Integral.vue'
+import Events from './components/Events.vue'
 import PageSkeleton from './components/PageSkeleton.vue'
 import { useGuessList } from '@/composables'
 // 获取轮播图数据
@@ -83,17 +84,17 @@ const onRefresherrefresh = async () => {
       <!-- 自定义轮播图 -->
       <XtxSwiper :list="bannerList" />
       <Gongju />
-
-      <Integral :list="bannerList2" />
+      <Events :list="bannerList2" />
       <!-- 首页推荐 -->
       <XtxGuess ref="guessRef" />
+    <!-- <XtxSaleGoods ref="guessRef" name="艺术概括" /> -->
     </template>
   </scroll-view>
 </template>
 
 <style lang="scss">
 page {
-  background-color: #f7f7f7;
+  background-color: #fff;
   height: 100%;
   display: flex;
   flex-direction: column;

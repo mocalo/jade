@@ -237,12 +237,10 @@ const onSubmit = async () => {
   <view class="content">
     <uni-forms :rules="rules" :model="form" ref="formRef">
       <!-- 表单内容 -->
-      <uni-forms-item name="receive_name" class="form-item">
-        <text class="label">收货人</text>
+      <uni-forms-item name="receive_name" label="收货人"  label-position="right" label-width="300" class="form-item">
         <input class="input" placeholder="请填写收货人姓名" v-model="form.receive_name" />
       </uni-forms-item>
-      <uni-forms-item name="receive_tel" class="form-item">
-        <text class="label">手机号码</text>
+      <uni-forms-item name="receive_tel" label="手机号码"  label-width="200" class="form-item">
         <input
           class="input"
           placeholder="请填写收货人手机号码"
@@ -250,8 +248,7 @@ const onSubmit = async () => {
           v-model="form.receive_tel"
         />
       </uni-forms-item>
-      <uni-forms-item name="area_info" class="form-item">
-        <text class="label">所在地区</text>
+      <uni-forms-item name="area_info" label="所在地区"  label-width="200" class="form-item">
         <picker
           @change="onRegionChange"
           class="picker"
@@ -260,12 +257,11 @@ const onSubmit = async () => {
           :range="multiArray_name"
           @columnchange="handleColumnChange"
         >
-          <view v-if="form.area_info">{{ form.area_info }}</view>
-          <view v-else class="placeholder">请选择省/市/区(县)</view>
+          <view class=" input" v-if="form.area_info">{{ form.area_info }}</view>
+          <view v-else class="placeholder input">请选择省/市/区(县)</view>
         </picker>
       </uni-forms-item>
-      <uni-forms-item name="address" class="form-item">
-        <text class="label">详细地址</text>
+      <uni-forms-item name="address" label="详细地址"  label-width="200" class="form-item">
         <input class="input" placeholder="街道、楼牌号等信息" v-model="form.address" />
       </uni-forms-item>
       <view class="form-item">
@@ -277,10 +273,10 @@ const onSubmit = async () => {
           :checked="form.isDefault === 1"
         />
       </view>
+  <button @tap="onSubmit" class="button">保存并使用</button>
     </uni-forms>
   </view>
   <!-- 提交按钮 -->
-  <button @tap="onSubmit" class="button">保存并使用</button>
 </template>
 
 <style lang="scss">
@@ -290,25 +286,25 @@ page {
 
 .content {
   margin: 20rpx 20rpx 0;
-  padding: 0 20rpx;
-  border-radius: 10rpx;
+  padding: 20rpx 20rpx 30rpx;
+  border-radius: 30rpx;
   background-color: #fff;
 
   .form-item,
   .uni-forms-item {
-    display: flex;
+    display: flex!important;
+	flex-direction: row;
     align-items: center;
     min-height: 96rpx;
     padding: 25rpx 10rpx;
     background-color: #fff;
-    font-size: 28rpx;
     border-bottom: 1rpx solid #ddd;
     position: relative;
     margin-bottom: 0;
-
+		
     // 调整 uni-forms 样式
     .uni-forms-item__content {
-      display: flex;
+      display: flex!important;
     }
 
     .uni-forms-item__error {
@@ -322,12 +318,17 @@ page {
     .label {
       width: 200rpx;
       color: #333;
+	  font-size: 28rpx;
     }
 
     .input {
-      flex: 1;
       display: block;
-      height: 46rpx;
+      height: 86rpx;
+	  background-color: #f3f3f3;
+	  padding: 10rpx 20rpx;
+	  border-radius: 20rpx;
+	  line-height:86rpx;
+    font-size: 28rpx!important;
     }
 
     .switch {
@@ -347,11 +348,12 @@ page {
 }
 
 .button {
-  height: 80rpx;
-  margin: 30rpx 20rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  margin: 30rpx 60rpx;
   color: #fff;
   border-radius: 80rpx;
   font-size: 30rpx;
-  background-color: #27ba9b;
+  background-image: linear-gradient(to right, #575759, #212123);
 }
 </style>

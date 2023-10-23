@@ -55,9 +55,7 @@ defineExpose({
   <view class="guess">
     <navigator class="guess-item" v-for="item in guessList" :key="item.id">
       <view class="image">
-        <view class="image3">
-          <image class="image4" src="@/static/images/item.png" />
-        </view>
+        
         <view class="image1">
           <view class="text1"> 平台交易 </view>
           <view class="text2">
@@ -65,9 +63,11 @@ defineExpose({
           </view>
         </view>
         <view class="image2">
-          <view class="text3"> <text class="price">总金额</text>{{ item.commission }} </view>
-          <view class="text4"> <text class="price">佣金</text>{{ item.money }} </view>
-          <view class="text4"><text class="price">积分</text>{{ item.score }}</view>
+          <view class="text3"> <text class="price"></text>+{{ item.commission }} </view>
+          <view class="infos">
+			  <view class="text4"> <text class="price">佣金+</text>{{ item.money }} </view>
+			  <view class="text4"><text class="price">积分+</text>{{ item.score }}</view>
+		  </view>
         </view>
       </view>
     </navigator>
@@ -113,58 +113,52 @@ defineExpose({
   flex-wrap: wrap;
   justify-content: space-between;
   padding: 0 20rpx;
+	margin: 0 30rpx;    
+	background-color: #fff;
+		border-radius: 20rpx;
   .guess-item {
     width: 100%;
     padding: 5rpx 0rpx 5rpx;
     border-radius: 10rpx;
     overflow: hidden;
-    background-color: #fff;
+	border-bottom: 1px solid #ddd;
   }
   .image {
-    width: 750rpx;
-    height: 100rpx;
-    background-color: #f3f3f3;
     //background-image: url(@/static/images/commission.png);
     background-size: cover;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    .image3 {
-      width: 20%;
-      height: 100%;
-      //background-color: #262626;
-      .image4 {
-        width: 100rpx;
-        height: 100rpx;
-      }
-    }
+    justify-content: space-between;
+	padding: 20rpx;
+   
     .image2 {
       width: 40%;
       height: 100%;
       .text3 {
         width: 100%;
-        text-align: right;
         font-size: 28rpx;
-        color: #799372;
-        padding-right: 50rpx;
+        color: #555;
+		text-align: right;
         .price {
-          text-align: right;
           font-size: 20rpx;
-          color: #799372;
+          color: #555;
         }
       }
-      .text4 {
-        width: 100%;
-        text-align: right;
+	  .infos {
+		  display: flex;
+		  position: relative;
+		  top: 20rpx;
+		  left: 20rpx;
+		  .text4 {
         font-size: 20rpx;
-        color: #799372;
-        padding-right: 50rpx;
-        .price {
-          text-align: right;
-          font-size: 16rpx;
-          color: #799372;
-        }
-      }
+		    color: #555;
+			padding: 0rpx 10rpx;
+		    .price {
+		      font-size: 16rpx;
+		      color: #555;
+		    }
+		  }
+	  }
+     
     }
     .image1 {
       width: 40%;
@@ -172,14 +166,15 @@ defineExpose({
       .text1 {
         width: 100%;
         text-align: left;
-        font-size: 36rpx;
-        color: #799372;
+        font-size: 28rpx;
+        color: #333;
+		margin-bottom: 20rpx;
       }
       .text2 {
         width: 100%;
         text-align: left;
         font-size: 20rpx;
-        color: #799372;
+        color: #777;
       }
     }
   }

@@ -30,7 +30,11 @@ const getPayAddress = async () => {
     payment_type = 'alipay'
   } else if (query.payFlag == 3) {
     payment_type = 'wechat'
-  }
+  }else if (query.payFlag == 4) {
+			payment_type = 'bnbusdt'
+		} else if (query.payFlag == 5) {
+			payment_type = 'trcusdt'
+		}
   console.log(query.orderId)
   console.log(order.value)
   var data = {
@@ -120,6 +124,32 @@ onLoad(async () => {
         />
       </view>
     </view>
+	
+			<view class="login" v-if="query.payFlag == 4">
+				<!-- 数字货币通道1 -->
+				<view class="weixin">
+					<image :src="payAddress?.qrcode_url" class="image" @tap="onTapImage(payAddress?.qrcode_url)" />
+				</view>
+				<view class="all">
+					<text class="title">地址：</text>
+					<text class="input">{{ payAddress?.address }}</text>
+					<view class="btn" @click="copyname(payAddress?.address)">复制</view>
+				</view>
+			</view>
+			<view class="login" v-if="query.payFlag == 5">
+				<!-- 数字货币通道2 -->
+				<view class="weixin">
+					<image :src="payAddress?.qrcode_url" class="image" @tap="onTapImage(payAddress?.qrcode_url)" />
+				</view>
+				<view class="all">
+					<text class="title">地址：</text>
+					<text class="input">{{ payAddress?.address }}</text>
+					<view class="btn" @click="copyname(payAddress?.address)">复制</view>
+				</view>
+				<!-- <view class="weixin" v-else">
+	  <image src="payAddress?.qrcode_url" class="image" />
+	</view> -->
+			</view>
   </view>
 </template>
 <style lang="scss">

@@ -72,7 +72,7 @@ defineExpose({
 <template>
   <!-- 猜你喜欢 -->
   <view class="caption">
-    <text class="text">{{ query?.name }}</text>
+    <text class="text">{{ query?.name?query?.name:"抢购专场" }}</text>
   </view>
   <view class="guess">
     <navigator
@@ -135,22 +135,23 @@ defineExpose({
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding: 0 20rpx;
+  padding: 0 35rpx;
   .guess-item {
-    width: 345rpx;
-    padding: 24rpx 20rpx 20rpx;
+    width: 335rpx;
+    padding: 0rpx 0rpx 20rpx;
     margin-bottom: 20rpx;
     border-radius: 10rpx;
     overflow: hidden;
     background-color: #fff;
   }
   .image {
-    width: 304rpx;
+    width: 335rpx;
     height: 304rpx;
   }
   .name {
-    height: 75rpx;
+    height: 45rpx;
     margin: 10rpx 0;
+	padding-left: 20rpx;
     font-size: 26rpx;
     color: #262626;
     overflow: hidden;
@@ -161,6 +162,7 @@ defineExpose({
   }
   .price {
     line-height: 1;
+	padding-left: 20rpx;
     padding-top: 4rpx;
     color: #cf4444;
     font-size: 26rpx;

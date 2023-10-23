@@ -61,72 +61,66 @@ defineExpose({
 </script>
 
 <template>
-  <view class="caption">
-    <view class="caption_item">
-      <view class="text1">{{ earningsResult?.income }}</view>
-      <view class="text">累计收益</view>
-    </view>
-    <view class="caption_item">
-      <view class="text1">{{ earningsResult?.order_count }}</view>
-      <view class="text">订单总数</view>
-    </view>
-  </view>
-  <view class="fenge">
-    <view class="text">收益列表</view>
+	
+	<view class="profile">
+		<view class="components">
+			<view class="toplist">
+				<view class="topitem">
+					<view class="topitem_2">
+						<text> {{ earningsResult?.income }} </text>
+					</view>
+					<view class="topitem_1">
+						<text> 累计收益 </text>
+					</view>
+				</view>
+				<view class="topitem">
+					<view class="topitem_2">
+						<text>{{ earningsResult?.order_count }} </text>
+					</view>
+					<view class="topitem_1">
+						<text> 订单总数 </text>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+	
+  
+  
+  <view class="tips">
+  	<text>来源/时间</text>
+  	<text>数量</text>
   </view>
   <!-- 猜你喜欢 -->
+  
   <view class="guess">
-    <navigator class="guess-item" v-for="item in guessList" :key="item.id">
-      <view class="image">
-        <view class="image3">
-          <image class="image4" src="@/static/images/item.png" />
-        </view>
-        <view class="image1">
-          <view class="text1"> 平台交易 </view>
-          <view class="text2">
-            {{ timechange(item.create_time) }}
-          </view>
-        </view>
-        <view class="image2">
-          <view class="text3"> <text class="price">收益</text>{{ item.income }} </view>
-        </view>
-      </view>
-    </navigator>
+  	<navigator class="guess-item" v-for="item in guessList" :key="item.id">
+  		<view class="image">
+  
+  			<view class="image1">
+  				<view class="text1"> 平台交易 </view>
+  				<view class="text2">
+  					<view class="text3">
+  						{{ timechange(item.create_time) }}
+  					</view>
+  					<view class="text4"> <text class="price"></text>收益{{ item.income }} </view>
+  				</view>
+  			</view>
+  		</view>
+  	</navigator>
   </view>
+  
   <view class="loading-text">
     {{ finish ? '没有更多数据~' : '正在加载...' }}
   </view>
 </template>
 
 <style lang="scss">
+	page {
+		background-color: #f3f3f3;
+	}
 :host {
   display: block;
-}
-/* 分类标题 */
-.caption {
-  display: flex;
-  justify-content: center;
-  line-height: 1;
-  padding: 36rpx 0 40rpx;
-  font-size: 32rpx;
-  background-image: url(@/static/images/earnings.png);
-  background-size: cover;
-  .caption_item {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    .text {
-      font-size: 20rpx;
-      color: #799372;
-      padding: 20rpx 0 0;
-    }
-    .text1 {
-      font-size: 32rpx;
-      color: #799372;
-    }
-  }
 }
 .fenge {
   display: flex;
@@ -140,86 +134,153 @@ defineExpose({
     padding: 20rpx 0 0;
   }
 }
-/* 猜你喜欢 */
-.guess {
-  //display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  padding: 0 20rpx;
-  .guess-item {
-    width: 100%;
-    padding: 5rpx 0rpx 5rpx;
-    border-radius: 10rpx;
-    overflow: hidden;
-    background-color: #fff;
-  }
-  .image {
-    width: 750rpx;
-    height: 80rpx;
-    background-color: #f3f3f3;
-    //background-image: url(@/static/images/Earnings.png);
-    background-size: cover;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    .image3 {
-      width: 20%;
-      height: 100%;
-      //background-color: #262626;
-      .image4 {
-        padding: 20rpx;
-        width: 50rpx;
-        height: 50rpx;
-      }
-    }
-    .image2 {
-      width: 30%;
-      height: 100%;
-      padding: 10rpx;
-      .text3 {
-        width: 100%;
-        text-align: right;
-        font-size: 20rpx;
-        color: #799372;
-        padding-right: 50rpx;
-        .price {
-          text-align: right;
-          font-size: 20rpx;
-          color: #799372;
-        }
-      }
-      .text4 {
-        width: 100%;
-        text-align: right;
-        font-size: 20rpx;
-        color: #799372;
-        padding-right: 50rpx;
-        .price {
-          text-align: right;
-          font-size: 16rpx;
-          color: #799372;
-        }
-      }
-    }
-    .image1 {
-      width: 50%;
-      height: 100%;
-      padding: 10rpx;
-      .text1 {
-        width: 100%;
-        text-align: left;
-        font-size: 20rpx;
-        color: #799372;
-      }
-      .text2 {
-        width: 100%;
-        text-align: left;
-        font-size: 20rpx;
-        color: #799372;
-      }
-    }
-  }
-}
+.profile {
+		margin: 20rpx 30rpx;
+		border-radius: 20rpx;
+		position: relative;
+		align-items: center;
+		height: 200rpx;
+		background-color: #fff;
+		box-shadow: 0rpx 10rpx 35rpx 10rpx #e6e6e6;
+
+		.components {
+			width: 100%;
+			height: 100%;
+
+			.toplist {
+				width: 100%;
+				height: 60%;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+
+				.topitem {
+					width: 50%;
+					height: 100%;
+					background-color: #fff;
+					margin: 20rpx 20rpx 0;
+
+					.topitem_1 {
+						width: 100%;
+						height: 20%;
+						margin-top: 10rpx;
+						align-items: center;
+						font-size: 20rpx;
+						color: #999;
+						text-align: center;
+					}
+
+					.topitem_2 {
+						margin-top: 60rpx;
+						width: 100%;
+						height: 40%;
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						text-align: center;
+						font-size: 60rpx;
+						color: #555;
+					}
+				}
+			}
+
+			.bottomlist {
+				width: 100%;
+				height: 40%;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+
+				.bottomitem {
+					width: 25%;
+					height: 80%;
+					background-color: #fff;
+					margin: 5rpx 5rpx 0;
+
+					.bottomitem_1 {
+						width: 100%;
+						height: 50%;
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						text-align: center;
+						font-size: 36rpx;
+						color: #555;
+					}
+
+					.bottomitem_2 {
+						width: 100%;
+						height: 50%;
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						text-align: center;
+						font-size: 18rpx;
+						color: #999;
+					}
+				}
+			}
+		}
+	}
+	
+	/* 猜你喜欢 */
+	.guess {
+		//display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		padding: 0 20rpx;
+		margin: 0 30rpx;
+		background-color: #fff;
+		border-radius: 20rpx;
+		.guess-item {
+			width: 100%;
+			padding: 5rpx 0rpx 5rpx;
+			border-radius: 10rpx;
+			overflow: hidden;
+			border-bottom: 1px solid #ddd;
+		}
+	
+		.image {
+			//background-image: url(@/static/images/commission.png);
+			background-size: cover;
+			display: flex;
+			justify-content: space-between;
+			padding: 20rpx;
+	
+	
+			.image1 {
+				width: 100%;
+				height: 100%;
+	
+				.text1 {
+					width: 100%;
+					text-align: left;
+					font-size: 28rpx;
+					color: #333;
+					margin-bottom: 20rpx;
+					position: relative;
+					left: -10rpx;
+				}
+	
+				.text2 {
+					width: 100%;
+					text-align: left;
+					font-size: 20rpx;
+					color: #777;
+					display: flex;
+					justify-content: space-between;
+				}
+			}
+		}
+	}
+	
+	.tips {
+		font-size: 24rpx;
+		color: #777;
+		display: flex;
+		margin: 30rpx 70rpx 20rpx;
+		justify-content: space-between;
+	}
 // 加载提示文字
 .loading-text {
   text-align: center;

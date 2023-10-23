@@ -9,9 +9,11 @@ const query = defineProps<{
 
 // tabs 数据
 const couponTabs = ref([
-  { payFlag: 1, title: '银行卡', isRender: false },
-  { payFlag: 2, title: '支付宝', isRender: false },
-  { payFlag: 3, title: '微信', isRender: false },
+  { payFlag: 1, title: '银行卡收款', isRender: false },
+  { payFlag: 2, title: '支付宝收款', isRender: false },
+  { payFlag: 3, title: '微信收款', isRender: false },
+  { payFlag: 4, title: 'BNB-USDT', isRender: false },
+  { payFlag: 5, title: 'TRC-USDT', isRender: false },
 ])
 
 // 高亮下标
@@ -24,8 +26,8 @@ couponTabs.value[activeIndex.value].isRender = true
   <view class="viewport">
     <!-- tabs -->
     <view class="tabs">
-      <text
-        class="item"
+      <view
+        :class="activeIndex==index?'active item':'item'"
         v-for="(item, index) in couponTabs"
         :key="item.title"
         @tap="
@@ -35,12 +37,19 @@ couponTabs.value[activeIndex.value].isRender = true
           }
         "
       >
-        {{ item.title }}
-      </text>
+	  
+	  <view class="pay-image">
+		  <image class="pay-icon" v-if="activeIndex == index" :src="'../../static/icon/Vectort-'+index+'.png'" mode="widthFix"></image>
+		  <image class="pay-icon" v-else :src="'../../static/icon/Vector-'+index+'.png'" mode="widthFix"></image>
+	  </view>
+        <view :class="activeIndex == index?'active':''">
+			{{ item.title }}
+		</view>
+      </view>
       <!-- 游标 -->
-      <view class="cursor" :style="{ left: activeIndex * 35 + '%' }"></view>
     </view>
     <!-- 滑动容器 -->
+	<view class="title">收款信息</view>
     <swiper class="swiper" :current="activeIndex" @change="activeIndex = $event.detail.current">
       <!-- 滑动项 -->
       <swiper-item v-for="item in couponTabs" :key="item.title">
@@ -56,34 +65,52 @@ couponTabs.value[activeIndex.value].isRender = true
 page {
   height: 100%;
   overflow: hidden;
+  background-color: #f3f3f3;
 }
 
 .viewport {
   height: 100%;
   display: flex;
   flex-direction: column;
-  background-color: #fff;
 }
 
 // tabs
 .tabs {
   display: flex;
-  justify-content: space-around;
+  flex-wrap: wrap;
   line-height: 60rpx;
-  margin: 0 10rpx;
-  background-color: #fff;
+  margin: 20rpx 10rpx;
   box-shadow: 0 4rpx 6rpx rgba(240, 240, 240, 0.6);
   position: relative;
   z-index: 9;
 
   .item {
-    flex: 1;
     text-align: center;
-    padding: 20rpx;
+	margin-bottom: 20rpx;
+	margin-right: 22rpx;
+    padding: 5rpx 0rpx;
     font-size: 28rpx;
-    color: #262626;
+    color: #777;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	border:2rpx solid #ccc;
+	border-radius: 20rpx;
+	width: 220rpx;
+	background-color: #fff;
+	.pay-image {
+		height: 60rpx;
+		.pay-icon {
+			width: 50rpx;
+		}
+	}
+	.active {
+		color: #333;
+	}
   }
-
+	.item+.active {
+		border: 2rpx solid #aaa;
+	}
   .cursor {
     position: absolute;
     left: 10%;
@@ -96,9 +123,15 @@ page {
     transition: all 0.4s;
   }
 }
-
+.title {
+	font-size: 28rpx;
+	padding-left: 35rpx;
+	font-weight: 700;
+}
 // swiper
 .swiper {
-  background-color: #f7f7f8;
+  background-color: #fff;
+  margin: 30rpx;
+  border-radius: 20rpx;
 }
 </style>

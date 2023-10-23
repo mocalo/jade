@@ -15,4 +15,5 @@ export type PayAddressRes = {
   /**开户行地址 */
   bank_address: string
   qrcode_image: string
+  address: string
 }

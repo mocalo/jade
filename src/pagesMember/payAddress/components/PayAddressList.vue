@@ -20,6 +20,10 @@ const getPayAddress = async () => {
     payment_type = 'alipay'
   } else if (query.payFlag == 3) {
     payment_type = 'wechat'
+  } else if (query.payFlag == 4) {
+    payment_type = 'bnbusdt'
+  } else if (query.payFlag == 5) {
+    payment_type = 'trcusdt'
   }
   var data = {
     payment_type: payment_type,
@@ -28,8 +32,10 @@ const getPayAddress = async () => {
   if (res.data != null) {
     addflag.value = true
     payAddress.value = res.data
+	console.log("进来了1")
     if (payAddress.value.qrcode_url != null) {
       payAddress.value.qrcode_image = payAddress.value.qrcode_url
+	console.log("进来了12",payAddress)
     }
   }
 }
@@ -113,6 +119,55 @@ const addWechat = async () => {
   }
 }
 
+//保存BNB-USDT
+const addBnbusdt = async () => {
+  var data = {
+    payment_type: 'bnbusdt',
+    name: payAddress.value.name,
+    address: payAddress.value.address,
+    password: password.value,
+    qrcode_url: payAddress.value.qrcode_url,
+  }
+  if (addflag.value == false) {
+    const res = await postPayAddressAPI(data)
+    uni.showToast({
+      title: '添加成功',
+      icon: 'none',
+    })
+    addflag.value = true
+  } else {
+    const res = await postPayUpdateAPI(data)
+    uni.showToast({
+      title: '修改成功',
+      icon: 'none',
+    })
+  }
+}
+//保存TRC-USDT 
+const addTrcusdt = async () => {
+  var data = {
+    payment_type: 'trcusdt',
+    name: payAddress.value.name,
+    address: payAddress.value.address,
+    password: password.value,
+    qrcode_url: payAddress.value.qrcode_url,
+  }
+  if (addflag.value == false) {
+    const res = await postPayAddressAPI(data)
+    uni.showToast({
+      title: '添加成功',
+      icon: 'none',
+    })
+    addflag.value = true
+  } else {
+    const res = await postPayUpdateAPI(data)
+    uni.showToast({
+      title: '修改成功',
+      icon: 'none',
+    })
+  }
+}
+
 //上传图片
 const uploadImage = async (e: any) => {
   uni.chooseImage({
@@ -162,12 +217,12 @@ onLoad(() => {
       </view>
 
       <view class="all">
-        <text class="title">银行</text>
+        <text class="title">银行名称</text>
         <input class="input" type="text" placeholder="请输入银行" v-model="payAddress.bank_name" />
       </view>
 
       <view class="all">
-        <text class="title">卡号</text>
+        <text class="title">银行卡号</text>
         <input
           class="input"
           type="text"
@@ -186,7 +241,7 @@ onLoad(() => {
         />
       </view>
       <view class="all1">
-        <text class="title1">二级密码</text>
+        <text class="title">二级密码</text>
         <input class="input" type="password" placeholder="请输入二级密码" v-model="password" />
       </view>
       <button class="button phone" @tap="addBank">保存</button>
@@ -223,6 +278,45 @@ onLoad(() => {
       </view>
       <button class="button phone" @tap="addWechat">保存</button>
     </view>
+	<!-- 数字货币 -->
+	<view class="login" v-if="query.payFlag == 4">
+	  <!-- 网页端表单登录 -->
+		  <view class="img-tips">收款二维码</view>
+	  <view class="weixin" @tap="uploadImage">
+	    <image :src="payAddress?.qrcode_image" class="image" />
+	    <!-- <image
+	      class="image"
+	      src="@/static/images/add.png"
+	      v-if="payAddress == null || payAddress.qrcode_url == null"
+	    /> -->
+	  </view>
+      <view class="all1">
+	    <text class="title1">地址</text>
+	    <input class="input" type="text" placeholder="请输入地址" v-model="payAddress.address" />
+	  </view>
+      <view class="all1">
+        <text class="title1">二级密码</text>
+        <input class="input" type="password" placeholder="请输入二级密码" v-model="password" />
+      </view>
+	  <!-- <button class="button phone" @tap="addWechat">保存</button> -->
+	  <button class="button phone" @tap="addBnbusdt">保存</button>
+	</view>
+	<view class="login" v-if="query.payFlag == 5">
+	  <!-- 网页端表单登录 -->
+		  <view class="img-tips">收款二维码</view>
+	  <view class="weixin" @tap="uploadImage">
+	    <image :src="payAddress?.qrcode_image" class="image" />
+	  </view>
+      <view class="all1">
+	    <text class="title1">地址</text>
+	    <input class="input" type="text" placeholder="请输入地址" v-model="payAddress.address" />
+	  </view>
+      <view class="all1">
+        <text class="title1">二级密码</text>
+        <input class="input" type="password" placeholder="请输入二级密码" v-model="password" />
+      </view>
+	  <button class="button phone" @tap="addTrcusdt">保存</button>
+	</view>
   </view>
 </template>
 
@@ -235,7 +329,7 @@ page {
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding: 20rpx 40rpx;
+  padding: 20rpx 30rpx 20rpx 30rpx;
 }
 
 .logo {
@@ -270,7 +364,7 @@ page {
   display: flex;
   flex-direction: column;
   height: 60vh;
-  padding: 40rpx 20rpx 20rpx;
+  padding: 40rpx 0rpx 20rpx;
   align-items: center;
   .all {
     width: 100%;
@@ -283,6 +377,7 @@ page {
     display: flex;
     justify-content: center;
     margin-top: 20rpx;
+	align-items: center;
   }
   .title1 {
     width: 20%;
@@ -292,16 +387,16 @@ page {
     margin-bottom: 20rpx;
   }
   .input {
-    width: 100%;
+    width: 75%;
     height: 80rpx;
     font-size: 28rpx;
-    border-radius: 72rpx;
-    border: 1px solid #ddd;
+    border-radius: 10rpx;
     padding-left: 30rpx;
     margin-bottom: 20rpx;
+	background-color: #f3f3f3;
   }
   .title {
-    width: 20%;
+    width: 25%;
     font-size: 28rpx;
     border-radius: 72rpx;
     padding: 20rpx;
@@ -312,7 +407,7 @@ page {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    width: 80%;
     height: 80rpx;
     font-size: 28rpx;
     border-radius: 72rpx;
@@ -325,11 +420,11 @@ page {
   }
 
   .phone {
-    background-color: #799372;
+   background-image: linear-gradient(to right, #575759, #212123);
   }
 
   .wechat {
-    background-color: #799372;
+    background-image: linear-gradient(to right, #575759, #212123);
   }
   .extra {
     flex: 1;
@@ -389,7 +484,10 @@ page {
     }
   }
 }
-
+.img-tips {
+	font-size: 22rpx;
+	color: #999;
+}
 .tips {
   position: absolute;
   bottom: 80rpx;

@@ -83,6 +83,18 @@ const loginSuccess = (profile: LoginResult) => {
   <!-- 注册-->
   <view class="viewport">
     <!-- 头像 -->
+		<view class="main">
+			<view class="title">
+				<view>您好，</view>
+				<view>欢迎来到玉珊阁</view>
+			</view>
+			<view class="login-text">
+				<view class="login-title">
+					注册
+				</view>
+				<view class="text-border"></view>
+			</view>
+		</view>
     <view class="avatar" v-if="profile_re.image">
       <view @tap="onAvatarChange" class="avatar-content">
         <image class="image" :src="profile_re?.image" mode="aspectFill" />
@@ -97,13 +109,14 @@ const loginSuccess = (profile: LoginResult) => {
     </view>
     <view class="login">
       <!-- 网页端注册 -->
-
+			<view class="login-tips">手机号</view>
       <input
         class="input"
         type="text"
         placeholder="请输入用户名/手机号码"
         v-model="profile_re.mobile"
       />
+			<view class="login-tips">登录密码</view>
       <input
         class="input"
         type="password"
@@ -111,6 +124,7 @@ const loginSuccess = (profile: LoginResult) => {
         placeholder="请输入密码"
         v-model="profile_re.password"
       />
+			<view class="login-tips">用户昵称</view>
       <input class="input" type="text" placeholder="请输入呢称" v-model="profile_re.nickname" />
       <!-- <input
         class="input"
@@ -118,7 +132,7 @@ const loginSuccess = (profile: LoginResult) => {
         placeholder="请输入邀请码码"
         v-model="profile_re.invite_code"
       /> -->
-      <button class="button phone" @tap="register">注册</button>
+      <button :class="(profile_re.mobile && profile_re.image && profile_re.password && profile_re.nickname)?'button phone':'button wechat'" class="button phone" @tap="register">注册</button>
     </view>
     <view class="tips">登录/注册即视为你同意《服务条款》</view>
   </view>
@@ -127,27 +141,49 @@ const loginSuccess = (profile: LoginResult) => {
 <style lang="scss">
 page {
   height: 100%;
+  
 }
 .viewport {
   width: 100%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  margin: 200rpx 0 0 0;
-  align-items: center;
+	margin: 100rpx 30rpx 0rpx;
+	.main {
+		margin: 0rpx 30rpx 40rpx;
+		font-size: 36rpx;
+		font-weight: 700;
+		color: #555;
+		line-height: 60rpx;
+		.login-text {
+			margin-top: 60rpx;
+			padding-left: 10rpx;
+			position: relative;
+			.login-title {
+				position: relative;
+				z-index: 9;
+			}
+			.text-border {
+				width: 100rpx;
+				height: 15rpx;
+				background-color: #11e0b6;
+				position: absolute;
+				bottom: 5rpx;
+				left: 0rpx;
+				z-index: 3;
+			}
+		}
+	}
   .avatar {
     text-align: center;
     width: 100%;
-    height: 260rpx;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 
     .image {
-      width: 200rpx;
-      height: 200rpx;
-      border-radius: 50%;
+      width: 100rpx;
+      height: 100rpx;
+	  border-radius: 10rpx;
       background-color: #eee;
     }
 
@@ -160,40 +196,50 @@ page {
     }
   }
   .login {
-    width: 100%;
+    width: 90%;
     display: flex;
     flex-direction: column;
-    height: 60vh;
-    padding: 40rpx 20rpx 20rpx;
+    height: 50vh;
+    padding: 10rpx 20rpx 20rpx;
+		.login-tips {
+			font-size: 26rpx;
+			margin-top: 20rpx;
+			color: #555;
+			font-weight: 700;
+		}
+  .input {
+    width: 100%;
+    height: 80rpx;
+    font-size: 28rpx;
+    border-bottom: 1px solid #eeee;
+    margin-bottom: 20rpx;
+  }
 
-    .input {
-      width: 100%;
-      height: 80rpx;
-      font-size: 28rpx;
-      border-radius: 72rpx;
-      border: 1px solid #ddd;
-      padding-left: 30rpx;
-      margin-bottom: 20rpx;
+  .button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 80rpx;
+    font-size: 28rpx;
+    border-radius: 72rpx;
+    color: #fff;
+	margin-top: 100rpx;
+	transition: all ease 0.5s;
+    .icon {
+      font-size: 40rpx;
+      margin-right: 6rpx;
     }
+  }
 
-    .button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      height: 80rpx;
-      font-size: 28rpx;
-      border-radius: 72rpx;
-      color: #fff;
-      .icon {
-        font-size: 40rpx;
-        margin-right: 6rpx;
-      }
-    }
+  .phone {
+    background-color: #11e0b6;
+  }
 
-    .phone {
-      background-color: #799372;
-    }
+  .wechat {
+    background-color: #ccc;
+  }
+
   }
   .tips {
     width: 100%;
