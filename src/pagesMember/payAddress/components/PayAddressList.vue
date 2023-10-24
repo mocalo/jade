@@ -32,10 +32,10 @@ const getPayAddress = async () => {
   if (res.data != null) {
     addflag.value = true
     payAddress.value = res.data
-	console.log("进来了1")
+    console.log('进来了1')
     if (payAddress.value.qrcode_url != null) {
       payAddress.value.qrcode_image = payAddress.value.qrcode_url
-	console.log("进来了12",payAddress)
+      console.log('进来了12', payAddress)
     }
   }
 }
@@ -119,7 +119,7 @@ const addWechat = async () => {
   }
 }
 
-//保存BNB-USDT
+//保存BSC-USDT
 const addBnbusdt = async () => {
   var data = {
     payment_type: 'bnbusdt',
@@ -143,7 +143,7 @@ const addBnbusdt = async () => {
     })
   }
 }
-//保存TRC-USDT 
+//保存TRC-USDT
 const addTrcusdt = async () => {
   var data = {
     payment_type: 'trcusdt',
@@ -278,45 +278,45 @@ onLoad(() => {
       </view>
       <button class="button phone" @tap="addWechat">保存</button>
     </view>
-	<!-- 数字货币 -->
-	<view class="login" v-if="query.payFlag == 4">
-	  <!-- 网页端表单登录 -->
-		  <view class="img-tips">收款二维码</view>
-	  <view class="weixin" @tap="uploadImage">
-	    <image :src="payAddress?.qrcode_image" class="image" />
-	    <!-- <image
+    <!-- 数字货币 -->
+    <view class="login" v-if="query.payFlag == 4">
+      <!-- 网页端表单登录 -->
+      <view class="img-tips">收款二维码</view>
+      <view class="weixin" @tap="uploadImage">
+        <image :src="payAddress?.qrcode_image" class="image" />
+        <!-- <image
 	      class="image"
 	      src="@/static/images/add.png"
 	      v-if="payAddress == null || payAddress.qrcode_url == null"
 	    /> -->
-	  </view>
+      </view>
       <view class="all1">
-	    <text class="title1">地址</text>
-	    <input class="input" type="text" placeholder="请输入地址" v-model="payAddress.address" />
-	  </view>
+        <text class="title1">地址</text>
+        <input class="input" type="text" placeholder="请输入地址" v-model="payAddress.address" />
+      </view>
       <view class="all1">
         <text class="title1">二级密码</text>
         <input class="input" type="password" placeholder="请输入二级密码" v-model="password" />
       </view>
-	  <!-- <button class="button phone" @tap="addWechat">保存</button> -->
-	  <button class="button phone" @tap="addBnbusdt">保存</button>
-	</view>
-	<view class="login" v-if="query.payFlag == 5">
-	  <!-- 网页端表单登录 -->
-		  <view class="img-tips">收款二维码</view>
-	  <view class="weixin" @tap="uploadImage">
-	    <image :src="payAddress?.qrcode_image" class="image" />
-	  </view>
+      <!-- <button class="button phone" @tap="addWechat">保存</button> -->
+      <button class="button phone" @tap="addBnbusdt">保存</button>
+    </view>
+    <view class="login" v-if="query.payFlag == 5">
+      <!-- 网页端表单登录 -->
+      <view class="img-tips">收款二维码</view>
+      <view class="weixin" @tap="uploadImage">
+        <image :src="payAddress?.qrcode_image" class="image" />
+      </view>
       <view class="all1">
-	    <text class="title1">地址</text>
-	    <input class="input" type="text" placeholder="请输入地址" v-model="payAddress.address" />
-	  </view>
+        <text class="title1">地址</text>
+        <input class="input" type="text" placeholder="请输入地址" v-model="payAddress.address" />
+      </view>
       <view class="all1">
         <text class="title1">二级密码</text>
         <input class="input" type="password" placeholder="请输入二级密码" v-model="password" />
       </view>
-	  <button class="button phone" @tap="addTrcusdt">保存</button>
-	</view>
+      <button class="button phone" @tap="addTrcusdt">保存</button>
+    </view>
   </view>
 </template>
 
@@ -377,7 +377,7 @@ page {
     display: flex;
     justify-content: center;
     margin-top: 20rpx;
-	align-items: center;
+    align-items: center;
   }
   .title1 {
     width: 20%;
@@ -387,13 +387,14 @@ page {
     margin-bottom: 20rpx;
   }
   .input {
-    width: 75%;
+    width: 60%;
     height: 80rpx;
     font-size: 28rpx;
     border-radius: 10rpx;
     padding-left: 30rpx;
     margin-bottom: 20rpx;
-	background-color: #f3f3f3;
+    background-color: #f3f3f3;
+    word-wrap: break-word;
   }
   .title {
     width: 25%;
@@ -420,7 +421,7 @@ page {
   }
 
   .phone {
-   background-image: linear-gradient(to right, #575759, #212123);
+    background-image: linear-gradient(to right, #575759, #212123);
   }
 
   .wechat {
@@ -485,8 +486,8 @@ page {
   }
 }
 .img-tips {
-	font-size: 22rpx;
-	color: #999;
+  font-size: 22rpx;
+  color: #999;
 }
 .tips {
   position: absolute;

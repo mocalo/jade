@@ -72,7 +72,7 @@ defineExpose({
 <template>
   <!-- 猜你喜欢 -->
   <view class="caption">
-    <text class="text">{{ query?.name?query?.name:"抢购专场" }}</text>
+    <text class="text">{{ query?.name ? query?.name : '抢购专场' }}</text>
   </view>
   <view class="guess">
     <navigator
@@ -151,7 +151,7 @@ defineExpose({
   .name {
     height: 45rpx;
     margin: 10rpx 0;
-	padding-left: 20rpx;
+    padding-left: 20rpx;
     font-size: 26rpx;
     color: #262626;
     overflow: hidden;
@@ -162,7 +162,7 @@ defineExpose({
   }
   .price {
     line-height: 1;
-	padding-left: 20rpx;
+    padding-left: 20rpx;
     padding-top: 4rpx;
     color: #cf4444;
     font-size: 26rpx;

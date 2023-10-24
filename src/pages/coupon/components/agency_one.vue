@@ -19,11 +19,11 @@ const getPayAddress = async () => {
     payment_type = 'alipay'
   } else if (query.payFlag == 3) {
     payment_type = 'wechat'
-  }else if (query.payFlag == 4) {
-			payment_type = 'bnbusdt'
-		} else if (query.payFlag == 5) {
-			payment_type = 'trcusdt'
-		}
+  } else if (query.payFlag == 4) {
+    payment_type = 'bnbusdt'
+  } else if (query.payFlag == 5) {
+    payment_type = 'trcusdt'
+  }
   var data = {
     payment_type: payment_type,
   }
@@ -116,32 +116,40 @@ onLoad(() => {
         <image src="payAddress?.qrcode_url" class="image" />
       </view> -->
     </view>
-	
-			<view class="login" v-if="query.payFlag == 4">
-				<!-- 数字货币通道1 -->
-				<view class="weixin">
-					<image :src="payAddress?.qrcode_url" class="image" @tap="onTapImage(payAddress?.qrcode_url)" />
-				</view>
-				<view class="all">
-					<text class="title">地址：</text>
-					<text class="input">{{ payAddress?.address }}</text>
-					<view class="btn" @click="copyname(payAddress?.address)">复制</view>
-				</view>
-			</view>
-			<view class="login" v-if="query.payFlag == 5">
-				<!-- 数字货币通道2 -->
-				<view class="weixin">
-					<image :src="payAddress?.qrcode_url" class="image" @tap="onTapImage(payAddress?.qrcode_url)" />
-				</view>
-				<view class="all">
-					<text class="title">地址：</text>
-					<text class="input">{{ payAddress?.address }}</text>
-					<view class="btn" @click="copyname(payAddress?.address)">复制</view>
-				</view>
-				<!-- <view class="weixin" v-else">
+
+    <view class="login" v-if="query.payFlag == 4">
+      <!-- 数字货币通道1 -->
+      <view class="weixin">
+        <image
+          :src="payAddress?.qrcode_url"
+          class="image"
+          @tap="onTapImage(payAddress?.qrcode_url)"
+        />
+      </view>
+      <view class="all">
+        <text class="title">地址：</text>
+        <text class="input">{{ payAddress?.address }}</text>
+        <view class="btn" @click="copyname(payAddress?.address)">复制</view>
+      </view>
+    </view>
+    <view class="login" v-if="query.payFlag == 5">
+      <!-- 数字货币通道2 -->
+      <view class="weixin">
+        <image
+          :src="payAddress?.qrcode_url"
+          class="image"
+          @tap="onTapImage(payAddress?.qrcode_url)"
+        />
+      </view>
+      <view class="all">
+        <text class="title">地址：</text>
+        <text class="input">{{ payAddress?.address }}</text>
+        <view class="btn" @click="copyname(payAddress?.address)">复制</view>
+      </view>
+      <!-- <view class="weixin" v-else">
 	  <image src="payAddress?.qrcode_url" class="image" />
 	</view> -->
-			</view>
+    </view>
   </view>
 </template>
 
@@ -155,7 +163,6 @@ page {
   flex-direction: column;
   height: 100%;
   // padding: 20rpx 40rpx;
-	
 }
 
 .logo {
@@ -172,8 +179,7 @@ page {
   display: flex;
   flex-direction: column;
   height: 50vh;
-  padding: 40rpx 20rpx 0rpx;
-	background-color: #fff;
+  background-color: #fff;
   .all {
     margin: 0rpx 35rpx;
     display: flex;
@@ -181,13 +187,14 @@ page {
   }
 
   .input {
-    width: 100%;
+    width: 60%;
     height: 40rpx;
     font-size: 28rpx;
-    padding: 20rpx 30rpx 0rpx 0rpx;
+    padding: 20rpx 0rpx 0rpx 0rpx;
     margin-bottom: 20rpx;
     text-align: left;
-	color: #333;
+    color: #333;
+    word-wrap: break-word;
     //border: 1px solid #799372;
   }
   .btn {
@@ -199,7 +206,7 @@ page {
     //实线框
     background-color: #fff;
     text-align: center;
-	color: #333;
+    color: #333;
   }
   .title {
     width: 34%;
@@ -207,7 +214,7 @@ page {
     border-radius: 72rpx;
     padding: 20rpx 30rpx 0rpx 0rpx;
     margin-bottom: 20rpx;
-	color: #333;	
+    color: #333;
   }
   .button {
     display: flex;

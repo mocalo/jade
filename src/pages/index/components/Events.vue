@@ -1,9 +1,9 @@
 <script setup lang="ts">
 //点击跳转页面
-const jumpPage = (name)=>{
-	uni.navigateTo({
-		url:name
-	})
+const jumpPage = (name) => {
+  uni.navigateTo({
+    url: name + '?type=1',
+  })
 }
 </script>
 
@@ -14,7 +14,7 @@ const jumpPage = (name)=>{
     </view>
     <view class="category-item" v-on:click="jumpPage('/pages/coupon/couponbuy')">
       <image class="icon" src="../../../static/images/banner_zk.png"></image>
-	</view>
+    </view>
   </view>
 </template>
 
