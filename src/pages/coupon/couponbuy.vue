@@ -120,7 +120,12 @@ onLoad(() => {
           <view class="fuli">
             <view class="fuli_yu"> 每分享一个会员可购买</view>
             <view class="fuli_yu"> 价值10000抵扣劵1张 </view>
-            <view class="fuli_yu fuli_money"> <text class="tips">代金卷金额</text>￥1,000 </view>
+            <view class="fuli_yu fuli_money">
+              <text class="tips">代金卷金额 {{ agent?.money }}</text>
+            </view>
+            <view class="fuli_yu fuli_money">
+              <text class="tips">usdt金额 {{ agent?.pay_usdt }}</text>
+            </view>
           </view>
           <!-- 			<view class="agent1">
 									<view class="button" @tap="findMyOrder()">我的盲盒</view>

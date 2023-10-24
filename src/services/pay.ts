@@ -1,3 +1,4 @@
+import type { paymentSell } from '@/types/home'
 import { http } from '@/utils/http'
 
 /**
@@ -40,7 +41,7 @@ export const orderPaySell = (data: { id: Number; payment_type: string; pay_image
 }
 
 export const orderPaySellMoney = (data: { id: Number }) => {
-  return http({
+  return http<paymentSell>({
     method: 'GET',
     url: '/api/order/consignSale',
     data,

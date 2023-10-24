@@ -64,6 +64,7 @@ export type AgentResult = {
   dec_price: number
   describe: string
   tag: string
+  pay_usdt: string
   update_time: number
   create_time: number
 }
@@ -83,6 +84,13 @@ export type seller = {
   wait_count: string
   delivery_count: string
   confirm_count: string
+}
+
+export type paymentSell = {
+  total_price: number
+  pay_money: string
+  pay_usdt: string
+  pay_rmb: number
 }
 
 /** 猜你喜欢-商品类型 */

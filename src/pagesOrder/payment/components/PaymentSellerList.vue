@@ -136,8 +136,7 @@ onLoad(async () => {
         />
       </view>
       <view class="all">
-        <text class="title">地址：</text>
-        <text class="input">{{ payAddress?.address }}</text>
+        <text class="input1">{{ payAddress?.address }}</text>
         <view class="btn" @click="copyname(payAddress?.address)">复制</view>
       </view>
     </view>
@@ -151,8 +150,7 @@ onLoad(async () => {
         />
       </view>
       <view class="all">
-        <text class="title">地址：</text>
-        <text class="input">{{ payAddress?.address }}</text>
+        <text class="input1">{{ payAddress?.address }}</text>
         <view class="btn" @click="copyname(payAddress?.address)">复制</view>
       </view>
       <!-- <view class="weixin" v-else">
@@ -206,6 +204,18 @@ page {
 
   .input {
     width: 70%;
+    overflow: hidden;
+    font-size: 28rpx;
+    padding: 20rpx 0rpx 0rpx 0rpx;
+    margin-bottom: 20rpx;
+    text-align: left;
+    color: #333;
+    word-wrap: break-word;
+    //border: 1px solid #799372;
+  }
+
+  .input1 {
+    width: 100%;
     overflow: hidden;
     font-size: 28rpx;
     padding: 20rpx 0rpx 0rpx 0rpx;

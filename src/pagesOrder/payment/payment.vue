@@ -262,7 +262,12 @@ onLoad(() => {
       </view>
     </view>
     <view class="btm-info">
-      <view class="pay-money"> 需付： ￥{{ order?.pay_cash }} </view>
+      <view class="pay-money" v-if="activeIndex != 3 && activeIndex != 4">
+        需付： ￥{{ order?.pay_cash }}
+      </view>
+      <view class="pay-money" v-if="activeIndex == 3 || activeIndex == 4">
+        需付： {{ order?.pay_usdt }}U
+      </view>
       <view class="buttons">
         <button class="button" @tap="PaySuccess">确定支付</button>
       </view>

@@ -11,6 +11,7 @@ import { onLoad } from '@dcloudio/uni-app'
 import { ref } from 'vue'
 import PaymentList from './components/PaymentSellerList.vue'
 import { phoneNumShow, timechange } from '@/utils/timechange'
+import type { paymentSell } from '@/types/home'
 
 // 获取页面参数
 const query = defineProps<{
@@ -37,10 +38,10 @@ const getMemberOrderByIdData = async () => {
 }
 
 //获取当前所需要支付的金额
-const money = ref(0)
+const money_all = ref<paymentSell>()
 const getMoney = async () => {
   const res = await orderPaySellMoney({ id: query.id })
-  money.value = Number(res.data)
+  money_all.value = res.data
 }
 
 // tabs 数据
@@ -180,16 +181,18 @@ onLoad(() => {
           </view>
           <view class="list list-money">
             <text>应付金额</text>
-            <text class="symbol"
-              >￥{{ money - Number(profile.money) > 0 ? money - Number(profile.money) : 0 }}</text
-            >
+            <text class="symbol">￥{{ money_all?.pay_rmb }}</text>
+          </view>
+          <view class="list list-money" v-if="activeIndex == 3 || activeIndex == 4">
+            <text>应付USDT</text>
+            <text class="symbol">{{ money_all?.pay_usdt }}</text>
           </view>
         </view>
       </view>
 
       <view class="pay_score">
         <view>我的佣金：{{ profile.money }}</view>
-        <view>总金额：{{ money }}</view>
+        <view>总金额：{{ money_all?.total_price }}</view>
       </view>
 
       <view class="main">
@@ -228,7 +231,7 @@ onLoad(() => {
           </swiper>
           <!--上传支付成功截图-->
           <view class="pay-title"> 上传凭证 </view>
-          <view v-if="money > Number(profile.money)">
+          <view v-if="money_all?.total_price > Number(profile.money)">
             <view class="payment">
               <view class="upload" @tap="uploadSuccessImage">
                 <image class="image" :src="Pay_image.full_url" v-if="Pay_image?.url" />
@@ -473,6 +476,7 @@ page {
     }
   }
   .pay-title {
+    //height: 500rpx;
     font-size: 32rpx !important;
     color: #333;
     padding-left: 55rpx;

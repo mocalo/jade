@@ -40,6 +40,7 @@ export type OrderResult = {
   payment_name: string
   pay_image: string
   pay_price: string
+  pay_usdt: string
   pay_time: number
   update_time: number
   create_time: number

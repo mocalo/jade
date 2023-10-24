@@ -152,13 +152,14 @@ onLoad(() => {
           <view class="fuli">
             <view class="fuli_yu"> 抢购福利玉佩</view>
             <view class="fuli_yu"> 即可成为平台代理会员 </view>
-            <view class="fuli_yu fuli_money" @tap="findMyOrder()">
-              <text class="tips">代理金额</text>￥2,000
+            <view class="fuli_yu fuli_money">
+              <text class="tips">代理金额:{{ agent?.money }}</text>
+            </view>
+            <view class="fuli_yu fuli_money">
+              <text class="tips">usdt:{{ agent?.pay_usdt }}</text>
             </view>
           </view>
-          <!-- 			<view class="agent1">
-						<view class="button" @tap="findMyOrder()">我的盲盒</view>
-					</view> -->
+          <view class="fuli_yu" @tap="findMyOrder()"> 我的盲盒</view>
         </view>
         <view class="top-right">
           <image class="top-right-image" src="../../static/icon/zkj.png" mode="widthFix"></image>
@@ -280,7 +281,6 @@ page {
   color: #799372;
   margin: 20rpx 0rpx 0rpx 0rpx;
   text-align: center;
-  padding-bottom: 40rpx;
 
   .button {
     width: 80%;
