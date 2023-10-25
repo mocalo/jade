@@ -1,17 +1,29 @@
 <script setup lang="ts">
+import { getArticleByTypeAPI } from '@/services/home'
+import type { ArticleItem } from '@/types/home'
 import { onLoad } from '@dcloudio/uni-app'
+import { ref } from 'vue'
 
+//获取说明文档
+const artList = ref<ArticleItem[]>([])
+const getCommissionData = async () => {
+  var tag = 'about'
+
+  const res = await getArticleByTypeAPI(tag)
+  artList.value = res.data
+}
+onLoad(async () => {
+  await getCommissionData()
+})
 </script>
 
 <template>
   <view class="viewport">
-    <view class="logo">
-      <image
-        src="@/static/images/logo.png"
-      ></image>
+    <view class="logo-main">
+      <image class="logo-image" src="../../static/images/logo_icon.png" mode="widthFix"></image>
     </view>
-    <view class="tips">
-      <text >2023版权归玉珊阁所有</text>
+    <view class="logo">
+      <rich-text :nodes="artList[0]?.art_content"></rich-text>
     </view>
   </view>
 </template>
@@ -37,11 +49,10 @@ page {
     margin-top: 15vh;
   }
 }
-.tips{
+.tips {
   text-align: center;
   color: #999;
   font-size: 24rpx;
   margin-top: 20rpx;
 }
-
 </style>

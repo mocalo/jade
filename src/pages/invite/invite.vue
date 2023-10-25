@@ -20,9 +20,9 @@ onLoad(async () => {
 
 <template>
   <view class="viewport">
-	  <view class="logo-main">
-		  <image class="logo-image" src="../../static/images/logo_icon.png" mode="widthFix"></image>
-	  </view>
+    <view class="logo-main">
+      <image class="logo-image" src="../../static/images/logo_icon.png" mode="widthFix"></image>
+    </view>
     <view class="logo">
       <rich-text :nodes="artList[0]?.art_content"></rich-text>
     </view>
@@ -36,28 +36,28 @@ page {
 
 .viewport {
   height: 100%;
-	.logo-main {
-		width: 40%;
-		margin: 40rpx auto;
-		min-height: 200rpx;
-		background-color: #fff;
-		border-radius: 20rpx;
-		box-shadow: 0rpx 10rpx 35rpx 10rpx #e6e6e6;
-		align-items: center;
-		font-weight: 700;
-		font-size: 42rpx;
-		color: #555;
-		.logo-image {
-			width: 100%;
-		}	
-	}
+  .logo-main {
+    width: 40%;
+    margin: 40rpx auto;
+    min-height: 200rpx;
+    background-color: #fff;
+    border-radius: 20rpx;
+    box-shadow: 0rpx 10rpx 35rpx 10rpx #e6e6e6;
+    align-items: center;
+    font-weight: 700;
+    font-size: 42rpx;
+    color: #555;
+    .logo-image {
+      width: 100%;
+    }
+  }
 }
 
 .logo {
   margin: 20rpx 0 0 0;
   padding: 40rpx;
-	font-weight: 500;
-	line-height: 50rpx;
+  font-weight: 500;
+  line-height: 50rpx;
   .image {
     width: 100%;
   }
