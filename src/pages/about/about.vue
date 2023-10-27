@@ -34,19 +34,31 @@ page {
 }
 
 .viewport {
-  display: flex;
-  flex-direction: column;
   height: 100%;
-  padding: 20rpx 40rpx;
+  .logo-main {
+    width: 40%;
+    margin: 40rpx auto;
+    min-height: 200rpx;
+    background-color: #fff;
+    border-radius: 20rpx;
+    box-shadow: 0rpx 10rpx 35rpx 10rpx #e6e6e6;
+    align-items: center;
+    font-weight: 700;
+    font-size: 42rpx;
+    color: #555;
+    .logo-image {
+      width: 100%;
+    }
+  }
 }
 
 .logo {
-  flex: 1;
-  text-align: center;
-  image {
-    width: 520rpx;
-    height: 220rpx;
-    margin-top: 15vh;
+  margin: 20rpx 0 0 0;
+  padding: 40rpx;
+  font-weight: 500;
+  line-height: 50rpx;
+  .image {
+    width: 100%;
   }
 }
 .tips {

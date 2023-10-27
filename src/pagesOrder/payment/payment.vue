@@ -10,7 +10,7 @@ import { onLoad } from '@dcloudio/uni-app'
 import { ref } from 'vue'
 import PaymentList from './components/PaymentList.vue'
 import { phoneNumShow, timechange } from '@/utils/timechange'
-import agency_one from '../../pages/agency/components/agency_one.vue'
+import agency_one from './components/agency_one.vue'
 // 获取页面参数
 const query = defineProps<{
   id: number
@@ -86,7 +86,7 @@ const PaySuccess = async () => {
   if (order.value?.order_type == 3) {
     if (Number(order.value?.pay_cash) - Number(memberStore.profile?.score) == 0) {
       if (couponTabs.value[activeIndex.value].payFlag == 1) {
-        payment_type = 'union'
+        payment_type = 'bank'
       } else if (couponTabs.value[activeIndex.value].payFlag == 2) {
         payment_type = 'alipay'
       } else if (couponTabs.value[activeIndex.value].payFlag == 3) {
@@ -103,7 +103,7 @@ const PaySuccess = async () => {
       })
     } else {
       if (couponTabs.value[activeIndex.value].payFlag == 1) {
-        payment_type = 'union'
+        payment_type = 'bank'
       } else if (couponTabs.value[activeIndex.value].payFlag == 2) {
         payment_type = 'alipay'
       } else if (couponTabs.value[activeIndex.value].payFlag == 3) {
@@ -118,7 +118,7 @@ const PaySuccess = async () => {
   } else {
     if (Number(order.value?.pay_cash) == 0) {
       if (couponTabs.value[activeIndex.value].payFlag == 1) {
-        payment_type = 'union'
+        payment_type = 'bank'
       } else if (couponTabs.value[activeIndex.value].payFlag == 2) {
         payment_type = 'alipay'
       } else if (couponTabs.value[activeIndex.value].payFlag == 3) {
@@ -131,7 +131,7 @@ const PaySuccess = async () => {
       })
     } else {
       if (couponTabs.value[activeIndex.value].payFlag == 1) {
-        payment_type = 'union'
+        payment_type = 'bank'
       } else if (couponTabs.value[activeIndex.value].payFlag == 2) {
         payment_type = 'alipay'
       } else if (couponTabs.value[activeIndex.value].payFlag == 3) {
@@ -153,9 +153,9 @@ const PaySuccess = async () => {
   uni.navigateBack()
 }
 
-onLoad(() => {
-  getMemberOrderByIdData()
-  getMemberProfileData()
+onLoad(async () => {
+  await getMemberOrderByIdData()
+  await getMemberProfileData()
   couponTabs.value[activeIndex.value].isRender = true
   Pay_image.value = {
     url: '',
@@ -247,7 +247,7 @@ onLoad(() => {
           <swiper-item v-for="item in couponTabs" :key="item.title">
             <!-- 抵扣券列表 -->
             <!-- <CouponList v-if="item.isRender" :payFlag="item.payFlag" /> -->
-            <agency_one v-if="item.isRender" :payFlag="item.payFlag" />
+            <agency_one v-if="item.isRender" :orderId="order?.id" :payFlag="item.payFlag" />
           </swiper-item>
         </swiper>
         <!--上传支付成功截图-->
