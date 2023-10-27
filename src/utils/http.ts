@@ -13,7 +13,7 @@
 import { useMemberStore } from '@/stores'
 
 // const baseURL = 'http://116.62.136.183/index.php/' ////'https://ysg.99thd.cn/index.php' //'https://ysg.99thd.cn/index.php' //'http://192.168.5.2:8081/index.php/' ////'https://ysg.99thd.cn/index.php' ///' //'https://pcapi-xiaotuxian-front-devtest.itheima.net'
-const baseURL = 'https://ysg.99thd.cn/index.php' //'http://192.168.5.2:8081/index.php/' ////'https://ysg.99thd.cn/index.php' //'https://ysg.99thd.cn/index.php' //'http://192.168.5.2:8081/index.php/' ////'https://ysg.99thd.cn/index.php' ///' //'https://pcapi-xiaotuxian-front-devtest.itheima.net'
+const baseURL = 'https://test.99thd.cn/index.php' //'http://192.168.5.2:8081/index.php/' ////'https://ysg.99thd.cn/index.php' //'https://ysg.99thd.cn/index.php' //'http://192.168.5.2:8081/index.php/' ////'https://ysg.99thd.cn/index.php' ///' //'https://pcapi-xiaotuxian-front-devtest.itheima.net'
 //'http://192.168.5.2:8081/index.php/'
 
 // 添加拦截器
