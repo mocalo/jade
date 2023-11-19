@@ -137,9 +137,15 @@
     {
 			"path": "pages/setPwd/setPwd",
 			"style": {
-				"navigationBarTitleText": "二级密码"
+				"navigationBarTitleText": "登录密码"
 			}
 		},
+    {
+    	"path": "pages/setPwd/setPayPwd",
+    	"style": {
+    		"navigationBarTitleText": "二级密码"
+    	}
+    },
     {
       "path": "pages/agency/agency",
       "style": {

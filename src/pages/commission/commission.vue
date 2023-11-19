@@ -65,7 +65,7 @@
 					</view>
 					<view class="bottomitem">
 						<view class="bottomitem_1">
-							<text> {{ commissionRes?.total_money }} </text>
+							<text> {{ commissionRes?.total_commission }} </text>
 						</view>
 						<view class="bottomitem_2">
 							<text> 累计佣金 </text>

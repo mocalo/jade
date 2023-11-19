@@ -161,7 +161,7 @@ const { guessRef, onScrolltolower } = useGuessList()
       <view class="infos-list">
         <navigator url="/pages/earnings/earnings" hover-class="none">
           <view class="info-number">
-            {{ commissionRes?.total_money }}
+            {{ commissionRes?.total_income }}
           </view>
           <view class="text">收益</view>
         </navigator>

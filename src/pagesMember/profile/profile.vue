@@ -125,22 +125,26 @@
 				</view>
 			</view>
 			<view class="form-content">
+        <navigator url="/pages/setPwd/setPwd" hover-class="none" >
 				<view class="form-item phone-main">
 					<text class="label">修改登录密码</text>
 					<view>
 						<text class="icon-right"></text>
 					</view>
 				</view>
+        </navigator>
 			</view>
 			<view class="form-content">
+        <navigator url="/pages/setPwd/setPayPwd" hover-class="none" >
 				<view class="form-item phone-main">
-					
+
 					<text class="label">修改支付密码</text>
-					<view><navigator url="/pages/setPwd/setPwd" hover-class="none" >
-						<text class="icon-right"></text></navigator>
+					<view>
+						<text class="icon-right"></text>
 					</view>
-					
+
 				</view>
+        </navigator>
 			</view>
 			<view class="form-content">
 				<view class="form-item phone-main"  @tap="onLogout" >

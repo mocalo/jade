@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onLoad } from '@dcloudio/uni-app'
 import { ref } from 'vue'
-import { getIsSetPwdAPI, postSetPwdAPI } from '@/services/setPwd'
+import { getIsSetPwdAPI, postSetPayPwdAPI, postSetPwdAPI } from '@/services/setPwd'
 
 // 获取页面参数
 const query = defineProps<{
@@ -17,27 +17,23 @@ export type PostParams = {
 
 const payAddress = ref({} as PostParams)
 
+const getPayAddress = async () => {
+  var res = await getIsSetPwdAPI()
+  addflag.value = res.data
+}
 
 const setMypwd = async () => {
-
-    if (payAddress.value.old_password == null || payAddress.value.old_password == '') {
-      uni.showToast({
-        title: '请输入原密码',
-        icon: 'none',
-      })
-      return
-    }
-
+  if (addflag.value) {
     if (payAddress.value.password == null || payAddress.value.password == '') {
       uni.showToast({
-        title: '请输入密码',
+        title: '请输入二级密码',
         icon: 'none',
       })
       return
     }
     if (payAddress.value.password_query == null || payAddress.value.password_query == '') {
       uni.showToast({
-        title: '请再次输入密码',
+        title: '请再次输入二级密码',
         icon: 'none',
       })
       return
@@ -49,11 +45,31 @@ const setMypwd = async () => {
       })
       return
     }
-    var data_new = {
-      oldPassword: payAddress.value.old_password,
-      newPassword: payAddress.value.password,
+    var data = {
+      old_password: payAddress.value.old_password,
+      password: payAddress.value.password,
     }
-    const res = await postSetPwdAPI(data_new)
+    const res = await postSetPayPwdAPI(data)
+    uni.showToast({
+      title: '设置成功',
+      icon: 'none',
+    })
+    uni.navigateBack({
+      delta: 1,
+    })
+  } else {
+    if (payAddress.value.password == null || payAddress.value.password == '') {
+      uni.showToast({
+        title: '请输入二级密码',
+        icon: 'none',
+      })
+      return
+    }
+    var data_new = {
+      old_password: payAddress.value.old_password,
+      password: payAddress.value.password,
+    }
+    const res = await postSetPayPwdAPI(data_new)
     uni.showToast({
       title: '设置成功',
       icon: 'none',
@@ -62,24 +78,25 @@ const setMypwd = async () => {
     uni.navigateBack({
       delta: 1,
     })
+  }
 }
 
 //挂件加载完成
 onLoad(() => {
-
+  getPayAddress()
 })
 </script>
 
 <template>
   <view class="viewport">
-    <view class="login">
+    <view class="login" v-if="addflag">
       <!-- 网页端表单登录 -->
       <view class="all">
         <text class="title">原密码</text>
         <input
           class="input"
           type="password"
-          placeholder="请输入原密码"
+          placeholder="请输入原二级密码"
           v-model="payAddress.old_password"
         />
       </view>
@@ -88,7 +105,7 @@ onLoad(() => {
         <input
           class="input"
           type="password"
-          placeholder="请输入新密码"
+          placeholder="请输入新二级密码"
           v-model="payAddress.password"
         />
       </view>
@@ -97,10 +114,23 @@ onLoad(() => {
         <input
           class="input"
           type="password"
-          placeholder="请再次输入密码"
+          placeholder="请再次输入二级密码"
           v-model="payAddress.password_query"
         />
       </view>
+      <button class="button phone" @tap="setMypwd">保存</button>
+    </view>
+    <view class="login" v-else>
+      <view class="all">
+        <text class="title">新密码</text>
+        <input
+          class="input"
+          type="password"
+          placeholder="请输入二级密码"
+          v-model="payAddress.password"
+        />
+      </view>
+
       <button class="button phone" @tap="setMypwd">保存</button>
     </view>
   </view>

@@ -159,7 +159,7 @@ onLoad(() => {
               <text class="tips">usdt:{{ agent?.pay_usdt }}</text>
             </view>
           </view>
-          <view class="fuli_yu" @tap="findMyOrder()"> 我的盲盒</view>
+          <view class="fuli_yu" @tap="findMyOrder()"> 物流信息</view>
         </view>
         <view class="top-right">
           <image class="top-right-image" src="../../static/icon/zkj.png" mode="widthFix"></image>
