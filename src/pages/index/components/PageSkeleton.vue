@@ -1,5 +1,10 @@
 <template name="skeleton">
-  <view is="components/XtxSwiper">
+  <view class="tips">
+    <image class="tips-icon" src="../../../static/icon/load.png"  mode="widthFix"></image>
+    <view>加载中~</view>
+
+  </view>
+ <!-- <view is="components/XtxSwiper">
     <view class="carousel XtxSwiper--carousel">
       <swiper :circular="true" :interval="3000" :current="0" :autoplay="false">
         <swiper-item
@@ -154,7 +159,7 @@
       >
     </view>
   </view>
-</template>
+ --></template>
 
 <style>
 /* #ifdef H5 */
@@ -162,7 +167,19 @@
 /* 原因：H5 端样式自动开启 scoped 隔离，导致骨架屏的基础样式被隔离 */
 @import '../styles/category.scss';
 @import '../styles/hot.scss';
-
+.tips {
+  margin: 400rpx auto;
+  width: 100%;
+  display: flex;
+  justify-content:center;
+  color: #999;
+  height: 80rpx;
+  align-items: center;
+  .tips-icon {
+    width: 50rpx;
+    margin-right: 10rpx;
+  }
+}
 .carousel,
 .carousel .image {
   height: 280rpx;

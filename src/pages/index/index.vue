@@ -39,6 +39,7 @@ onLoad(async () => {
   await Promise.all([getHomeBannerData()])
   await Promise.all([getScoreBannerData()])
   isLoading.value = false
+
 })
 
 // 猜你喜欢组合式函数调用
@@ -77,7 +78,9 @@ const onRefresherrefresh = async () => {
     class="scroll-view"
     scroll-y
   >
+
     <PageSkeleton v-if="isLoading" />
+    
     <template v-else>
       <!-- 自定义导航栏 -->
       <CustomNavbar />
